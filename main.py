@@ -47,6 +47,7 @@ while True:
 
     logo.setPosition(x, y)
 
+    #проверяю объекты на предмет столкновения с персонажем
     for i in range(len(bedroom)):
         if logo.intersects(bedroom[i]):
             if pressed[pygame.K_RIGHT]:
