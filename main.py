@@ -1,7 +1,10 @@
 import pygame, sys
 import GameObject
 from GameObject import *
+import intersectionObjects
+from intersectionObjects import *
 
+# проверяет, находимся ли мы в границах окна
 def checkIfOutBoundary(character, x, y):
     if x + characterSize[0] > 800:
         x = 800 - characterSize[0]
@@ -31,6 +34,9 @@ characterSize = character.get_size()
 
 x, y = 200, 100
 
+# создаем "хитбокс" для персонажа
+logo = GameObject(x, y, characterSize[0], characterSize[1])
+
 clock = pygame.time.Clock()
 
 while True:
@@ -39,7 +45,22 @@ while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT: sys.exit()
 
-    pressed = pygame.key.get_pressed() #реализую движение персонажа по экрану
+    logo.setPosition(x, y)
+
+    for i in range(len(bedroom)):
+        if logo.intersects(bedroom[i]):
+            if pressed[pygame.K_RIGHT]:
+                x -= 5
+            if pressed[pygame.K_LEFT]:
+                x += 5
+            if pressed[pygame.K_UP]:
+                y += 5
+            if pressed[pygame.K_DOWN]:
+                y -= 5
+
+
+    #реализую движение персонажа по экрану
+    pressed = pygame.key.get_pressed()
     if pressed[pygame.K_RIGHT]:
         x += 5
     if pressed[pygame.K_LEFT]:
