@@ -12,9 +12,9 @@ class GameObject:
         self.y = y
 
     def intersectsY(self, other):
-        if self.y >= other.y and self.y <= (other.y + other.height):
+        if self.y >= other.y and self.y <= (other.y + other.height - self.height):
             return 1
-        if (self.y + self.height) >= other.y and self.y + self.height <= (other.y + other.height):
+        if (self.y + self.height) >= other.y and self.y + self.height <= (other.y + other.height - self.height):
             return 1
         return 0
 
