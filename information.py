@@ -4,6 +4,12 @@ from gameObject import *
 from locations import *
 from textObject import *
 
+#данные о персонаже
+x, y = 710, 575
+character = pygame.image.load("images/characters/char.png")
+characterSize = character.get_size()
+logo = GameObject(x, y, characterSize[0], characterSize[1])
+
 #cписок локаций
 locationObjectsList = {
 "bedroom": LocationObject((1024, 768), pygame.image.load("images/locations/bedroom.png")),
@@ -12,7 +18,7 @@ locationObjectsList = {
 
 #СПАЛЬНЯ
 bedroomIntersectionObjectsList = [GameObject(13, 550, 280, 204)]
-bedroomTextObjectsList = [TextObject(None, 30, (255, 255, 255), "Грусть, печаль, тоска", 1, bedroomIntersectionObjectsList[0])]
+bedroomTextObjectsList = [TextObject(None, 30, (255, 255, 255), "Грусть, печаль, тоска", 0, bedroomIntersectionObjectsList[0])]
 bedroomExitObjectsList = [[GameObject(264, 153, 109, 223), "library"]]
 
 locationObjectsList["bedroom"].setGameField(GameObject(0, 374, 1024, 374))

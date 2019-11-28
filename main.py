@@ -18,17 +18,6 @@ character = pygame.image.load("images/characters/char.png")
 background = locationObjectsList["bedroom"]
 characterSize = character.get_size()
 
-#Настраиваю штуки (потом всю информацию о настройках для определенных локаций перенести в отдельный файл)
-"""background.setGameField(GameObject(0, 374, 1024, 374))
-background.setIntersectionObjectsList(bedroomIntersectionObjectsList)
-background.setExitObjectsList(bedroomExitObjectsList)"""
-
-x, y = 710, 575
-isIngameField = True
-
-# создаем "хитбокс" для персонажа
-logo = GameObject(x, y, characterSize[0], characterSize[1])
-
 clock = pygame.time.Clock()
 
 while True:
@@ -59,11 +48,6 @@ while True:
             background = locationObjectsList[background.exitObjectsList[i][1]]
             x, y = background.exit_x, background.exit_y
 
-    #проверяю персонажа на предмет столкновения с текстовыми зонами
-    for i in range(len(background.textObjectsList)):
-        if logo.intersects(background.textObjectsList[i].object):
-            background.textObjectsList[i].draw(background.textObjectsList[i].object, background.background)
-
     #проверяем нахождение персонажа в границах игровой зоны
     if not logo.intersects(background.gameFieldObject):
         if pressed[pygame.K_RIGHT]:
@@ -88,9 +72,13 @@ while True:
         y += 5
 
 
-
     screen.blit(background.background, (0, 0))
     screen.blit(character, (x, y))
+
+    #проверяю персонажа на предмет столкновения с текстовыми зонами
+    for i in range(len(background.textObjectsList)):
+        if logo.intersects(background.textObjectsList[i].object):
+            background.textObjectsList[i].draw(logo, screen)
 
 
     pygame.display.update()

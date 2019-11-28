@@ -11,4 +11,4 @@ class TextObject(GameObject):
         self.object = object
 
     def draw(self, other, surface):
-        surface.blit(self.text, (other.x + other.width//2, other.y + other.height//2))
+        surface.blit(self.text, (other.x, other.y - 20))     
