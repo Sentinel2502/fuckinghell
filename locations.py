@@ -28,6 +28,9 @@ class LocationObject:
     def setExitObjectsList(self, exitObjectsList): #задает список объектов при соприкосновении с кот., игрок переходит на другую локацию
         self.exitObjectsList = exitObjectsList
 
+    def setTextObjectsList(self, textObjectsList):
+        self.textObjectsList = textObjectsList
+
     def checkIfOutBoundary(self, character, coordinates): #проверяет, находится ли персонаж в границах экрана (character - спрайт персонажа)
         self.coordinates = coordinates
         self.x = self.coordinates[0]

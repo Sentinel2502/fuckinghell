@@ -51,13 +51,18 @@ while True:
             if pressed[pygame.K_DOWN]:
                 y -= 5
 
-    #проверяю персонажа на предмет столкновения с "выходами"ъ
+    #проверяю персонажа на предмет столкновения с "выходами"
     for i in range(len(background.exitObjectsList)):
         if not logo.intersects(background.exitObjectsList[i][0]):
             pass
         else:
             background = locationObjectsList[background.exitObjectsList[i][1]]
             x, y = background.exit_x, background.exit_y
+
+    #проверяю персонажа на предмет столкновения с текстовыми зонами
+    for i in range(len(background.textObjectsList)):
+        if logo.intersects(background.textObjectsList[i].object):
+            background.textObjectsList[i].draw(background.textObjectsList[i].object, background.background)
 
     #проверяем нахождение персонажа в границах игровой зоны
     if not logo.intersects(background.gameFieldObject):
@@ -69,6 +74,7 @@ while True:
             y += 5
         if pressed[pygame.K_DOWN]:
             y -= 5
+
 
     #реализую движение персонажа по экрану
     pressed = pygame.key.get_pressed()
