@@ -14,28 +14,36 @@ class GameObject:
         self.x = x
         self.y = y
 
-    def intersectsY(self, other):
-        if self.y >= other.y and self.y <= (other.y + other.height - self.height):
+    def intersectsY(self, other, margin):
+        y = other.y
+        height = other.height
+        y -= margin
+        height += 2*margin
+        if self.y >= y and self.y <= (y + height - self.height):
             return 1
-        if (self.y + self.height) >= other.y and self.y + self.height <= (other.y + other.height - self.height):
-            return 1
-        return 0
-
-    def intersectsX(self, other):
-        if self.x >= other.x and self.x <= other.x + other.width:
-            return 1
-        if (self.x + self.width) > other.x and (self.x + self.width) <= (other.x + other.width):
+        if (self.y + self.height) >= y and self.y + self.height <= (y + height - self.height):
             return 1
         return 0
 
-    def intersects(self, other):
-        if self.intersectsX(other) and self.intersectsY(other):
+    def intersectsX(self, other, margin):
+        x = other.x
+        width = other.width
+        width += 2*margin
+        x -= margin
+        if self.x >= x and self.x <= x + width:
+            return 1
+        if (self.x + self.width) > x and (self.x + self.width) <= (x + width):
             return 1
         return 0
-    def moveIfIntersects(self, other, coordinates, pressed):
+
+    def intersects(self, other, margin):
+        if self.intersectsX(other, margin) and self.intersectsY(other, margin):
+            return 1
+        return 0
+    """def moveIfIntersects(self, other, coordinates, pressed):
         x = coordinates[0]
         y = coordinates[1]
-        """if self.intersectsY(other) and y > other.y:
+        if self.intersectsY(other) and y > other.y:
             if pressed[pygame.K_UP]:
                 y -= 5
             if pressed[pygame.K_DOWN]:
@@ -79,6 +87,6 @@ class GameObject:
             if pressed[pygame.K_RIGHT]:
                 x += 5
             if pressed[pygame.K_LEFT]:
-                x -= 5"""
+                x -= 5
 
-        return x, y
+        return x, y"""

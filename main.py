@@ -27,25 +27,21 @@ while True:
 
     logo.setPosition(x, y)
 
-    #"ловлю" нажатые кнопки
-    pressed = pygame.key.get_pressed()
-
     #проверяю объекты на предмет столкновения с персонажем
     for i in range(len(background.intersectionObjectsList)):
-        if logo.intersects(background.intersectionObjectsList[i]):
-            if pressed[pygame.K_UP]:
-                y += 5
-            if pressed[pygame.K_DOWN]:
-                y -= 5
+        if logo.intersects(background.intersectionObjectsList[i], 0):
             if pressed[pygame.K_RIGHT]:
                 x -= 5
             if pressed[pygame.K_LEFT]:
                 x += 5
-        #x, y = logo.moveIfIntersects(background.intersectionObjectsList[i], (x, y), pressed)
+            if pressed[pygame.K_UP]:
+                y += 5
+            if pressed[pygame.K_DOWN]:
+                y -= 5
 
     #проверяю персонажа на предмет столкновения с "выходами"
     for i in range(len(background.exitObjectsList)):
-        if not logo.intersects(background.exitObjectsList[i][0]):
+        if not logo.intersects(background.exitObjectsList[i][0], 0):
             pass
         else:
             background = locationObjectsList[background.exitObjectsList[i][1]]
@@ -58,6 +54,7 @@ while True:
     screen.blit(character, (x, y))
 
     #реализую перемещение персонажа
+    pressed = pygame.key.get_pressed()
     if pressed[pygame.K_UP]:
         y -= 5
     if pressed[pygame.K_DOWN]:
@@ -69,8 +66,8 @@ while True:
 
     #проверяю персонажа на предмет столкновения с текстовыми зонами
     for i in range(len(background.textObjectsList)):
-        if logo.intersects(background.textObjectsList[i].object):
-            background.textObjectsList[i].draw(logo, screen)
+        if logo.intersects(background.textObjectsList[i].object, 10):
+            background.textObjectsList[i].ask(logo, screen, pygame.image.load("images/icons/eye.png"), pressed)
 
 
     pygame.display.update()
