@@ -5,7 +5,6 @@ from gameObject import *
 from locations import *
 from information import *
 
-
 #Initialize pygame
 pygame.init()
 pygame.mixer.init()
@@ -28,17 +27,21 @@ while True:
 
     logo.setPosition(x, y)
 
+    #"ловлю" нажатые кнопки
+    pressed = pygame.key.get_pressed()
+
     #проверяю объекты на предмет столкновения с персонажем
     for i in range(len(background.intersectionObjectsList)):
         if logo.intersects(background.intersectionObjectsList[i]):
-            if pressed[pygame.K_RIGHT]:
-                x -= 5
-            if pressed[pygame.K_LEFT]:
-                x += 5
             if pressed[pygame.K_UP]:
                 y += 5
             if pressed[pygame.K_DOWN]:
                 y -= 5
+            if pressed[pygame.K_RIGHT]:
+                x -= 5
+            if pressed[pygame.K_LEFT]:
+                x += 5
+        #x, y = logo.moveIfIntersects(background.intersectionObjectsList[i], (x, y), pressed)
 
     #проверяю персонажа на предмет столкновения с "выходами"
     for i in range(len(background.exitObjectsList)):
@@ -49,31 +52,20 @@ while True:
             x, y = background.exit_x, background.exit_y
 
     #проверяем нахождение персонажа в границах игровой зоны
-    if not logo.intersects(background.gameFieldObject):
-        if pressed[pygame.K_RIGHT]:
-            x -= 5
-        if pressed[pygame.K_LEFT]:
-            x += 5
-        if pressed[pygame.K_UP]:
-            y += 5
-        if pressed[pygame.K_DOWN]:
-            y -= 5
+    x, y = background.checkIfOutBoundary(character, (x, y))
 
+    screen.blit(background.background, (0, 0))
+    screen.blit(character, (x, y))
 
-    #реализую движение персонажа по экрану
-    pressed = pygame.key.get_pressed()
-    if pressed[pygame.K_RIGHT]:
-        x += 5
-    if pressed[pygame.K_LEFT]:
-        x -= 5
+    #реализую перемещение персонажа
     if pressed[pygame.K_UP]:
         y -= 5
     if pressed[pygame.K_DOWN]:
         y += 5
-
-
-    screen.blit(background.background, (0, 0))
-    screen.blit(character, (x, y))
+    if pressed[pygame.K_RIGHT]:
+        x += 5
+    if pressed[pygame.K_LEFT]:
+        x -= 5
 
     #проверяю персонажа на предмет столкновения с текстовыми зонами
     for i in range(len(background.textObjectsList)):

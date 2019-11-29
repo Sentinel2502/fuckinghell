@@ -32,20 +32,19 @@ class LocationObject:
         self.textObjectsList = textObjectsList
 
     def checkIfOutBoundary(self, character, coordinates): #проверяет, находится ли персонаж в границах экрана (character - спрайт персонажа)
-        self.coordinates = coordinates
-        self.x = self.coordinates[0]
-        self.y = self.coordinates[1]
-        self.character = character
-        characterSize = self.character.get_size()
-        if self.x + characterSize[0] > self.width:
-            self.x = self.width - characterSize[0]
+        x = coordinates[0]
+        y = coordinates[1]
+        character = character
+        characterSize = character.get_size()
+        if x + characterSize[0] > self.width:
+            x = self.width - characterSize[0]
 
-        if self.y + characterSize[1] > self.height:
-            self.y = self.height - characterSize[1]
+        if y + characterSize[1] > self.height:
+            y = self.height - characterSize[1]
 
-        if self.y <= 0:
-            self.y = 0
-        if self.x <= 0:
-            self.x = 0
+        if y <= 0:
+            y = 0
+        if x <= 0:
+            x = 0
 
-        return self.x, self.y
+        return x, y
