@@ -15,5 +15,3 @@ class TextObject(GameObject):
 
     def ask(self, other, surface, image, pressed): #, image, pressed, button
         surface.blit(image, (other.x + other.width//2, other.y - image.get_size()[0] - 10))
-        if pressed[pygame.K_e]:
-            self.draw(other, surface, image)

@@ -68,6 +68,7 @@ while True:
     for i in range(len(background.textObjectsList)):
         if logo.intersects(background.textObjectsList[i].object, 10):
             background.textObjectsList[i].ask(logo, screen, pygame.image.load("images/icons/eye.png"), pressed)
+            pygame.time.wait(10)
 
 
     pygame.display.update()
