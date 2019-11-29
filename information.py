@@ -1,8 +1,11 @@
 """инормация для игры"""
 
+import pygame
 from gameObject import *
 from locations import *
 from textObject import *
+
+pygame.init()
 
 #данные о персонаже
 x, y = 710, 575
@@ -18,7 +21,7 @@ locationObjectsList = {
 
 #СПАЛЬНЯ
 bedroomIntersectionObjectsList = [GameObject(13, 550, 280, 204)]
-bedroomTextObjectsList = [TextObject(None, 30, (255, 255, 255), "пидором", 0, bedroomIntersectionObjectsList[0])]
+bedroomTextObjectsList = [TextObject(None, 30, (255, 255, 255), "ХУй", 0, bedroomIntersectionObjectsList[0])]
 bedroomExitObjectsList = [[GameObject(264, 153, 109, 223), "library"]]
 
 locationObjectsList["bedroom"].setGameField(GameObject(0, 374, 1024, 374))
@@ -38,3 +41,15 @@ locationObjectsList["library"].setIntersectionObjectsList(libraryIntersectionObj
 locationObjectsList["library"].setExitObjectsList(libraryExitObjectsList)
 locationObjectsList["library"].setExitPoint((306, 680))
 locationObjectsList["library"].setTextObjectsList(libraryTextObjectsList)
+
+#ИНВЕНТАРЬ
+inventoryObject = GameObject(1024, 768, 272, 384)
+inventoryObject.setImage(pygame.image.load("images/icons/inventory.png"))
+inventory = [
+GameObject(19 + inventoryObject.x, 32 + inventoryObject.y, 231, 164),
+GameObject(17 + inventoryObject.x, 235 + inventoryObject.y, 62, 54),
+GameObject(102 + inventoryObject.x, 235 + inventoryObject.y, 62, 54),
+GameObject(187 + inventoryObject.x, 235 + inventoryObject.y, 62, 54),
+GameObject(17 + inventoryObject.x, 304 + inventoryObject.y, 62, 54),
+GameObject(102 + inventoryObject.x, 304 + inventoryObject.y, 62, 54),
+GameObject(187 + inventoryObject.x, 304 + inventoryObject.y, 62, 54)]
