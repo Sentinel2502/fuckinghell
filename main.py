@@ -17,6 +17,7 @@ character = pygame.image.load("images/characters/char.png")
 background = locationObjectsList["bedroom"]
 characterSize = character.get_size()
 currentTextMessage = TextObject(None, 10, (0, 0, 0), "", 1, logo)
+isInventory = False
 
 clock = pygame.time.Clock()
 
@@ -66,7 +67,15 @@ while True:
     if pressed[pygame.K_a]:
         x -= 5
 
+    #Проверяю, нажати ли кнопка вызова инвенторя
+    if pressed[pygame.K_q]:
+        isInventory = True
+    if pressed[pygame.K_ESCAPE]:
+        isInventory = False
+
     screen.blit(currentTextMessage.text, (logo.x + logo.width//2, logo.y - logo.width - 10))
+    if isInventory:
+        screen.blit(inventoryObject.image, (512 - inventoryObject.width//2, 384 - inventoryObject.height//2))
 
     #проверяю персонажа на предмет столкновения с текстовыми зонами
     for i in range(len(background.textObjectsList)):
@@ -77,8 +86,5 @@ while True:
                 background.textObjectsList[i].ask(logo, screen, pygame.image.load("images/icons/eye.png"))
         else:
             currentTextMessage = TextObject(None, 10, (0, 0, 0), "", 1, logo)
-
-    #"рисую" на экране текстовое сообщение
-    #screen.blit(currentTextMessage.text, (logo.x + logo.width//2, logo.y - logo.width - 10))
 
     pygame.display.update()
