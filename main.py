@@ -31,13 +31,13 @@ while True:
     #проверяю объекты на предмет столкновения с персонажем
     for i in range(len(background.intersectionObjectsList)):
         if logo.intersects(background.intersectionObjectsList[i], 0):
-            if pressed[pygame.K_RIGHT]:
+            if pressed[pygame.K_d]:
                 x -= 5
-            if pressed[pygame.K_LEFT]:
+            if pressed[pygame.K_a]:
                 x += 5
-            if pressed[pygame.K_UP]:
+            if pressed[pygame.K_w]:
                 y += 5
-            if pressed[pygame.K_DOWN]:
+            if pressed[pygame.K_s]:
                 y -= 5
 
     #проверяю персонажа на предмет столкновения с "выходами"
@@ -57,13 +57,13 @@ while True:
 
     #реализую перемещение персонажа
     pressed = pygame.key.get_pressed()
-    if pressed[pygame.K_UP]:
+    if pressed[pygame.K_w]:
         y -= 5
-    if pressed[pygame.K_DOWN]:
+    if pressed[pygame.K_s]:
         y += 5
-    if pressed[pygame.K_RIGHT]:
+    if pressed[pygame.K_d]:
         x += 5
-    if pressed[pygame.K_LEFT]:
+    if pressed[pygame.K_a]:
         x -= 5
 
     screen.blit(currentTextMessage.text, (logo.x + logo.width//2, logo.y - logo.width - 10))
