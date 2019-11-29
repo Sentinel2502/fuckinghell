@@ -13,5 +13,5 @@ class TextObject(GameObject):
     def draw(self, other, surface):
         surface.blit(self.text, (other.x + other.width//2, other.y - other.width - 10))
 
-    def ask(self, other, surface, image, pressed): #, image, pressed, button
+    def ask(self, other, surface, image): #, image, pressed, button
         surface.blit(image, (other.x + other.width//2, other.y - image.get_size()[0] - 10))

@@ -16,6 +16,7 @@ pygame.mouse.set_visible(0)
 character = pygame.image.load("images/characters/char.png")
 background = locationObjectsList["bedroom"]
 characterSize = character.get_size()
+currentTextMessage = TextObject(None, 10, (0, 0, 0), "", 1, logo)
 
 clock = pygame.time.Clock()
 
@@ -50,6 +51,7 @@ while True:
     #проверяем нахождение персонажа в границах игровой зоны
     x, y = background.checkIfOutBoundary(character, (x, y))
 
+    #"рисую на экране" задник и персонажа
     screen.blit(background.background, (0, 0))
     screen.blit(character, (x, y))
 
@@ -64,13 +66,19 @@ while True:
     if pressed[pygame.K_LEFT]:
         x -= 5
 
+    screen.blit(currentTextMessage.text, (logo.x + logo.width//2, logo.y - logo.width - 10))
+
     #проверяю персонажа на предмет столкновения с текстовыми зонами
     for i in range(len(background.textObjectsList)):
         if logo.intersects(background.textObjectsList[i].object, 10):
             if pressed[pygame.K_e]:
-                background.textObjectsList[i].draw(logo, screen)
-            else:
-                background.textObjectsList[i].ask(logo, screen, pygame.image.load("images/icons/eye.png"), pressed)
+                currentTextMessage = background.textObjectsList[i]
+            elif currentTextMessage != background.textObjectsList[i]:
+                background.textObjectsList[i].ask(logo, screen, pygame.image.load("images/icons/eye.png"))
+        else:
+            currentTextMessage = TextObject(None, 10, (0, 0, 0), "", 1, logo)
 
+    #"рисую" на экране текстовое сообщение
+    #screen.blit(currentTextMessage.text, (logo.x + logo.width//2, logo.y - logo.width - 10))
 
     pygame.display.update()

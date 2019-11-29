@@ -18,7 +18,7 @@ locationObjectsList = {
 
 #СПАЛЬНЯ
 bedroomIntersectionObjectsList = [GameObject(13, 550, 280, 204)]
-bedroomTextObjectsList = [TextObject(None, 30, (255, 255, 255), "Грусть, печаль, тоска", 0, bedroomIntersectionObjectsList[0])]
+bedroomTextObjectsList = [TextObject(None, 30, (255, 255, 255), "пидором", 0, bedroomIntersectionObjectsList[0])]
 bedroomExitObjectsList = [[GameObject(264, 153, 109, 223), "library"]]
 
 locationObjectsList["bedroom"].setGameField(GameObject(0, 374, 1024, 374))
