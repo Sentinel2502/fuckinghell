@@ -1,4 +1,4 @@
-"Главный файл для запуска программы. Нужен для отладки функций движка"
+"Главный файл для запуска программы"
 
 import pygame, sys
 from gameObject import *
@@ -73,9 +73,10 @@ while True:
     if pressed[pygame.K_ESCAPE]:
         isInventory = False
 
+    #Вывожу на экран текст об объекте с кот. соприкасаюсь и меню
     screen.blit(currentTextMessage.text, (logo.x + logo.width//2, logo.y - logo.width - 10))
     if isInventory:
-        screen.blit(inventoryObject.image, (512 - inventoryObject.width//2, 384 - inventoryObject.height//2))
+        screen.blit(inventorySlotObject.image, (512 - inventorySlotObject.width//2, 384 - inventorySlotObject.height//2))
 
     #проверяю персонажа на предмет столкновения с текстовыми зонами
     for i in range(len(background.textObjectsList)):
