@@ -5,7 +5,6 @@ from gameObject import *
 from locations import *
 from information import *
 
-
 #Initialize pygame
 pygame.init()
 pygame.mixer.init()
@@ -17,17 +16,8 @@ pygame.mouse.set_visible(0)
 character = pygame.image.load("images/characters/char.png")
 background = locationObjectsList["bedroom"]
 characterSize = character.get_size()
-
-#Настраиваю штуки (потом всю информацию о настройках для определенных локаций перенести в отдельный файл)
-"""background.setGameField(GameObject(0, 374, 1024, 374))
-background.setIntersectionObjectsList(bedroomIntersectionObjectsList)
-background.setExitObjectsList(bedroomExitObjectsList)"""
-
-x, y = 710, 575
-isIngameField = True
-
-# создаем "хитбокс" для персонажа
-logo = GameObject(x, y, characterSize[0], characterSize[1])
+currentTextMessage = TextObject(None, 10, (0, 0, 0), "", 1, logo)
+isInventory = False
 
 clock = pygame.time.Clock()
 
@@ -41,50 +31,60 @@ while True:
 
     #проверяю объекты на предмет столкновения с персонажем
     for i in range(len(background.intersectionObjectsList)):
-        if logo.intersects(background.intersectionObjectsList[i]):
-            if pressed[pygame.K_RIGHT]:
+        if logo.intersects(background.intersectionObjectsList[i], 0):
+            if pressed[pygame.K_d]:
                 x -= 5
-            if pressed[pygame.K_LEFT]:
+            if pressed[pygame.K_a]:
                 x += 5
-            if pressed[pygame.K_UP]:
+            if pressed[pygame.K_w]:
                 y += 5
-            if pressed[pygame.K_DOWN]:
+            if pressed[pygame.K_s]:
                 y -= 5
 
-    #проверяю персонажа на предмет столкновения с "выходами"ъ
+    #проверяю персонажа на предмет столкновения с "выходами"
     for i in range(len(background.exitObjectsList)):
-        if not logo.intersects(background.exitObjectsList[i][0]):
+        if not logo.intersects(background.exitObjectsList[i][0], 0):
             pass
         else:
             background = locationObjectsList[background.exitObjectsList[i][1]]
             x, y = background.exit_x, background.exit_y
 
     #проверяем нахождение персонажа в границах игровой зоны
-    if not logo.intersects(background.gameFieldObject):
-        if pressed[pygame.K_RIGHT]:
-            x -= 5
-        if pressed[pygame.K_LEFT]:
-            x += 5
-        if pressed[pygame.K_UP]:
-            y += 5
-        if pressed[pygame.K_DOWN]:
-            y -= 5
+    x, y = background.checkIfOutBoundary(character, (x, y))
 
-    #реализую движение персонажа по экрану
-    pressed = pygame.key.get_pressed()
-    if pressed[pygame.K_RIGHT]:
-        x += 5
-    if pressed[pygame.K_LEFT]:
-        x -= 5
-    if pressed[pygame.K_UP]:
-        y -= 5
-    if pressed[pygame.K_DOWN]:
-        y += 5
-
-
-
+    #"рисую на экране" задник и персонажа
     screen.blit(background.background, (0, 0))
     screen.blit(character, (x, y))
 
+    #реализую перемещение персонажа
+    pressed = pygame.key.get_pressed()
+    if pressed[pygame.K_w]:
+        y -= 5
+    if pressed[pygame.K_s]:
+        y += 5
+    if pressed[pygame.K_d]:
+        x += 5
+    if pressed[pygame.K_a]:
+        x -= 5
+
+    #Проверяю, нажати ли кнопка вызова инвенторя
+    if pressed[pygame.K_q]:
+        isInventory = True
+    if pressed[pygame.K_ESCAPE]:
+        isInventory = False
+
+    screen.blit(currentTextMessage.text, (logo.x + logo.width//2, logo.y - logo.width - 10))
+    if isInventory:
+        screen.blit(inventoryObject.image, (512 - inventoryObject.width//2, 384 - inventoryObject.height//2))
+
+    #проверяю персонажа на предмет столкновения с текстовыми зонами
+    for i in range(len(background.textObjectsList)):
+        if logo.intersects(background.textObjectsList[i].object, 10):
+            if pressed[pygame.K_e]:
+                currentTextMessage = background.textObjectsList[i]
+            elif currentTextMessage != background.textObjectsList[i]:
+                background.textObjectsList[i].ask(logo, screen, pygame.image.load("images/icons/eye.png"))
+        else:
+            currentTextMessage = TextObject(None, 10, (0, 0, 0), "", 1, logo)
 
     pygame.display.update()
