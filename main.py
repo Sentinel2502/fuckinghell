@@ -27,6 +27,7 @@ while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT: sys.exit()
 
+    #задаю координаты гг
     logo.setPosition(x, y)
 
     #проверяю объекты на предмет столкновения с персонажем
@@ -73,6 +74,7 @@ while True:
     if pressed[pygame.K_ESCAPE]:
         isInventory = False
 
+    #выводит на экран текстовое сообщение и инвентарь
     screen.blit(currentTextMessage.text, (logo.x + logo.width//2, logo.y - logo.width - 10))
     if isInventory:
         screen.blit(inventoryObject.image, (512 - inventoryObject.width//2, 384 - inventoryObject.height//2))
