@@ -9,6 +9,7 @@ class TextObject(GameObject):
         self.font = pygame.font.Font(fontName, fontSize)
         self.text = self.font.render(text, smoothing, color)
         self.object = object
+        self.message = text
 
     def draw(self, other, surface):
         surface.blit(self.text, (other.x + other.width//2, other.y - other.width - 10))
