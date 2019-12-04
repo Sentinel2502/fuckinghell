@@ -84,11 +84,10 @@ while True:
         if logo.intersects(background.textObjectsList[i].object, 10):
             if pressed[pygame.K_e]:
                 currentTextMessage = background.textObjectsList[i]
-                #screen.blit(currentTextMessage.text, (logo.x + logo.width//2, logo.y - logo.width - 10))
-            else:
+            elif currentTextMessage != background.textObjectsList[i]:
                 background.textObjectsList[i].ask(logo, screen, pygame.image.load("images/icons/eye.png"))
         else:
-            currentTextMessage = TextObject(None, 10, (0, 0, 0), "фыва", 1, logo)
+            currentTextMessage = TextObject(None, 10, (0, 0, 0), "", 1, logo)
 
     #Вывожу на экран текст об объекте с кот. соприкасаюсь и меню
     screen.blit(currentTextMessage.text, (logo.x + logo.width//2, logo.y - logo.width - 10))
