@@ -20,8 +20,10 @@ locationObjectsList = {
 
 
 #СПАЛЬНЯ
-bedroomIntersectionObjectsList = [GameObject(13, 550, 280, 204), GameObject(625, 324, 268, 107)]
-bedroomTextObjectsList = [TextObject(None, 30, (255, 255, 255), "Куча мусора", 1, bedroomIntersectionObjectsList[0]), TextObject(None, 30, (255, 255, 255), "Лучше бы гроб здесь поставили :D", 1, bedroomIntersectionObjectsList[1])]
+bedroomIntersectionObjectsList = [GameObject(13, 550, 280, 204), GameObject(625, 324, 268, 107), GameObject(900, 92, 219, 542-92)]
+bedroomTextObjectsList = [TextObject(None, 30, (255, 255, 255), "Куча мусора", 1, bedroomIntersectionObjectsList[0]),
+TextObject(None, 30, (255, 255, 255), "Лучше бы гроб здесь поставили :D", 1, bedroomIntersectionObjectsList[1]),
+TextObject(None, 30, (255, 255, 255), "Боль, дебаг, страдания", 1, bedroomIntersectionObjectsList[2])]
 bedroomExitObjectsList = [[GameObject(264, 153, 109, 223), "library"]]
 
 locationObjectsList["bedroom"].setGameField(GameObject(0, 374, 1024, 374))

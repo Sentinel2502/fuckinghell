@@ -76,22 +76,22 @@ while True:
 
     #Вывожу на экран текст об объекте с кот. соприкасаюсь и меню
     #screen.blit(currentTextMessage.text, (logo.x + logo.width//2, logo.y - logo.width - 10))
-    if isInventory:
-        screen.blit(inventorySlotObject.image, (512 - inventorySlotObject.width//2, 384 - inventorySlotObject.height//2))
+    #if isInventory:
+    #    screen.blit(inventorySlotObject.image, (512 - inventorySlotObject.width//2, 384 - inventorySlotObject.height//2))
 
     #проверяю персонажа на предмет столкновения с текстовыми зонами
     for i in range(len(background.textObjectsList)):
         if logo.intersects(background.textObjectsList[i].object, 10):
+            screen.blit(currentTextMessage.text, (logo.x + logo.width//2, logo.y - logo.width - 10))
             if pressed[pygame.K_e]:
                 currentTextMessage = background.textObjectsList[i]
             elif currentTextMessage != background.textObjectsList[i]:
                 background.textObjectsList[i].ask(logo, screen, pygame.image.load("images/icons/eye.png"))
-        else:
-            currentTextMessage = TextObject(None, 10, (0, 0, 0), "", 1, logo)
+        
 
     #Вывожу на экран текст об объекте с кот. соприкасаюсь и меню
-    screen.blit(currentTextMessage.text, (logo.x + logo.width//2, logo.y - logo.width - 10))
+    #screen.blit(currentTextMessage.text, (logo.x + logo.width//2, logo.y - logo.width - 10))
     if isInventory:
-        screen.blit(inventorySlotObject.image, (512 - inventorySlotObject.width//2, 384 - inventorySlotObject.height//2))
+        screen.blit(inventoryObject.image, (512 - inventoryObject.width//2, 384 - inventoryObject.height//2))
 
     pygame.display.update()
