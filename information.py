@@ -45,14 +45,10 @@ locationObjectsList["library"].setExitPoint((306, 680))
 locationObjectsList["library"].setTextObjectsList(libraryTextObjectsList)
 
 #ИНВЕНТАРЬ
-<<<<<<< HEAD
-#ИНВЕНТАРЬ
 inventoryObject = GameObject(1024, 768, 272, 384)
 inventoryObject.setImage(pygame.image.load("images/icons/inventory.png"))
-=======
 inventorySlotObject = GameObject(1024, 768, 272, 384)
 inventorySlotObject.setImage(pygame.image.load("images/icons/inventory.png"))
->>>>>>> afd3bd3cf1ceb0e98477b8b0e323b8bc12365733
 inventory = [
 GameObject(19 + inventorySlotObject.x, 32 + inventorySlotObject.y, 231, 164),
 GameObject(17 + inventorySlotObject.x, 235 + inventorySlotObject.y, 62, 54),
