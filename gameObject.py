@@ -23,7 +23,7 @@ class GameObject:
         y -= margin
         height += 2*margin
 
-        if self.y + self.height >= y and self.y <= y + height:
+        if self.y + self.height >= y and self.y + self.height <= y + height:
             return 1
         return 0
 

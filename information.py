@@ -26,8 +26,8 @@ bedroomTextObjectsList = [TextObject(None, 20, (255, 255, 255), "Куча мус
 TextObject(None, 20, (255, 255, 255), "Лучше бы гроб здесь поставили :D", 1, bedroomIntersectionObjectsList[1]),
 TextObject(None, 20, (255, 255, 255), "Боль, дебаг, страдания", 1, bedroomIntersectionObjectsList[2])]
 bedroomExitObjectsList = [[GameObject(264, 153, 109, 223), "library"]]
-bedroomItemObjectsList = [InvItemObject(616+11, 464+4, 19, 35, pygame.image.load("images/objects/candle.png"), False),
-InvItemObject(400+11, 464+4, 19, 35, pygame.image.load("images/objects/candle.png"), False)]
+bedroomItemObjectsList = [InvItemObject(616+11, 464+4, 19, 35, pygame.image.load("images/objects/candle.png"), 1),
+InvItemObject(400+11, 464+4, 19, 35, pygame.image.load("images/objects/candle.png"), 1)]
 
 locationObjectsList["bedroom"].setGameField(GameObject(0, 374, 1024, 374))
 locationObjectsList["bedroom"].setIntersectionObjectsList(bedroomIntersectionObjectsList)
@@ -41,12 +41,15 @@ locationObjectsList["bedroom"].setItemObjectsList(bedroomItemObjectsList)
 libraryIntersectionObjectsList = [GameObject(164, 459, 383-164, 593-459)]
 libraryExitObjectsList = [[GameObject(271, 752, 600, 100), "bedroom"]]
 libraryTextObjectsList = [TextObject(None, 20, (255, 255, 255), "Грусть, печаль, тоска", 1, libraryIntersectionObjectsList[0])]
+libraryItemObjectsList = [InvItemObject(616+11, 464+4, 19, 35, pygame.image.load("images/objects/candle.png"), 1),
+InvItemObject(400+11, 464+4, 19, 35, pygame.image.load("images/objects/candle.png"), 1)]
 
 locationObjectsList["library"].setGameField(GameObject(60, 400, 905, 367))
 locationObjectsList["library"].setIntersectionObjectsList(libraryIntersectionObjectsList)
 locationObjectsList["library"].setExitObjectsList(libraryExitObjectsList)
 locationObjectsList["library"].setExitPoint((306, 680))
 locationObjectsList["library"].setTextObjectsList(libraryTextObjectsList)
+locationObjectsList["library"].setItemObjectsList(libraryItemObjectsList)
 
 #ИНВЕНТАРЬ
 inventoryObject = GameObject(1024, 768, 272, 384)
