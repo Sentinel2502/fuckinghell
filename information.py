@@ -4,6 +4,7 @@ import pygame
 from gameObject import *
 from locations import *
 from textObject import *
+from invItemObject import *
 
 pygame.init()
 
@@ -25,12 +26,15 @@ bedroomTextObjectsList = [TextObject(None, 20, (255, 255, 255), "Куча мус
 TextObject(None, 20, (255, 255, 255), "Лучше бы гроб здесь поставили :D", 1, bedroomIntersectionObjectsList[1]),
 TextObject(None, 20, (255, 255, 255), "Боль, дебаг, страдания", 1, bedroomIntersectionObjectsList[2])]
 bedroomExitObjectsList = [[GameObject(264, 153, 109, 223), "library"]]
+bedroomItemObjectsList = [InvItemObject(616+11, 464+4, 19, 35, pygame.image.load("images/objects/candle.png"), False),
+InvItemObject(400+11, 464+4, 19, 35, pygame.image.load("images/objects/candle.png"), False)]
 
 locationObjectsList["bedroom"].setGameField(GameObject(0, 374, 1024, 374))
 locationObjectsList["bedroom"].setIntersectionObjectsList(bedroomIntersectionObjectsList)
 locationObjectsList["bedroom"].setExitObjectsList(bedroomExitObjectsList)
 locationObjectsList["bedroom"].setExitPoint((268, 384))
 locationObjectsList["bedroom"].setTextObjectsList(bedroomTextObjectsList)
+locationObjectsList["bedroom"].setItemObjectsList(bedroomItemObjectsList)
 
 
 #БИБЛИОТЕКА

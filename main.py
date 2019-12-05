@@ -29,33 +29,7 @@ while True:
 
     #задаю координаты гг
     logo.setPosition(x, y)
-
-    #проверяю объекты на предмет столкновения с персонажем
-    for i in range(len(background.intersectionObjectsList)):
-        if logo.intersects(background.intersectionObjectsList[i], 0):
-            if pressed[pygame.K_d]:
-                x -= 5
-            if pressed[pygame.K_a]:
-                x += 5
-            if pressed[pygame.K_w]:
-                y += 5
-            if pressed[pygame.K_s]:
-                y -= 5
-
-    #проверяю персонажа на предмет столкновения с "выходами"
-    for i in range(len(background.exitObjectsList)):
-        if not logo.intersects(background.exitObjectsList[i][0], 0):
-            pass
-        else:
-            background = locationObjectsList[background.exitObjectsList[i][1]]
-            x, y = background.exit_x, background.exit_y
-
-    #проверяем нахождение персонажа в границах игровой зоны
-    x, y = background.checkIfOutBoundary(character, (x, y))
-
-    #"рисую на экране" задник и персонажа
-    screen.blit(background.background, (0, 0))
-    screen.blit(character, (x, y))
+    pressed = pygame.key.get_pressed()
 
     #реализую перемещение персонажа
     pressed = pygame.key.get_pressed()
@@ -68,13 +42,59 @@ while True:
     if pressed[pygame.K_a]:
         x -= 5
 
+    #ОБЪЕКТЫ, которые можно взять
+    for i in range(len(background.itemObjectsList)):
+        if logo.intersects(background.itemObjectsList[i], 0):
+            if pressed[pygame.K_d]:
+                x -= 5
+            if pressed[pygame.K_a]:
+                x += 5
+            if pressed[pygame.K_w]:
+                y += 5
+            if pressed[pygame.K_s]:
+                y -= 5
+        else:
+            pass
+
+    #проверяю объекты на предмет столкновения с персонажем
+    """for i in range(len(background.intersectionObjectsList)):
+        if logo.intersects(background.intersectionObjectsList[i], 0):
+            if pressed[pygame.K_d]:
+                x -= 5
+            if pressed[pygame.K_a]:
+                x += 5
+            if pressed[pygame.K_w]:
+                y += 5
+            if pressed[pygame.K_s]:
+                y -= 5"""
+
+    #проверяю персонажа на предмет столкновения с "выходами"
+    """for i in range(len(background.exitObjectsList)):
+        if not logo.intersects(background.exitObjectsList[i][0], 0):
+            pass
+        else:
+            background = locationObjectsList[background.exitObjectsList[i][1]]
+            x, y = background.exit_x, background.exit_y"""
+
+    #проверяем нахождение персонажа в границах игровой зоны
+    x, y = background.checkIfOutBoundary(character, (x, y))
+
+    #"рисую на экране" задник
+    screen.blit(background.background, (0, 0))
+    #"рисую" на экране предметы, которые можно подобрать
+    for i in range(len(background.itemObjectsList)):
+        screen.blit(background.itemObjectsList[i].image, (background.itemObjectsList[i].x, background.itemObjectsList[i].y))
+    #"рисую" на экране персонажа
+    screen.blit(character, (x, y))
+
     #Проверяю, нажати ли кнопка вызова инвенторя
     if pressed[pygame.K_q]:
         isInventory = True
     if pressed[pygame.K_ESCAPE]:
         isInventory = False
 
-    for i in range(len(background.textObjectsList)):
+    #Проверяю гг на предмет пересечения с текстовыми зонами, если есть нажатие, вывожу текст на экран
+    """for i in range(len(background.textObjectsList)):
         if logo.intersects(background.textObjectsList[i].object, 10):
             if pressed[pygame.K_e]:
                 background.textObjectsList[i].setIsVisible(1)
@@ -83,9 +103,9 @@ while True:
             else:
                 background.textObjectsList[i].ask(logo, screen, pygame.image.load("images/icons/eye.png"))
         else:
-            background.textObjectsList[i].setIsVisible(0)
+            background.textObjectsList[i].setIsVisible(0)"""
 
-    #инвентарь
+    #вывожу инвентарь на экран
     if isInventory:
         screen.blit(inventoryObject.image, (512 - inventoryObject.width//2, 384 - inventoryObject.height//2))
 
