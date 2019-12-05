@@ -21,9 +21,9 @@ locationObjectsList = {
 
 #СПАЛЬНЯ
 bedroomIntersectionObjectsList = [GameObject(13, 550, 280, 204), GameObject(625, 324, 268, 107), GameObject(900, 92, 219, 542-92)]
-bedroomTextObjectsList = [TextObject(None, 30, (255, 255, 255), "Куча мусора", 1, bedroomIntersectionObjectsList[0]),
-TextObject(None, 30, (255, 255, 255), "Лучше бы гроб здесь поставили :D", 1, bedroomIntersectionObjectsList[1]),
-TextObject(None, 30, (255, 255, 255), "Боль, дебаг, страдания", 1, bedroomIntersectionObjectsList[2])]
+bedroomTextObjectsList = [TextObject(None, 20, (255, 255, 255), "Куча мусора", 1, bedroomIntersectionObjectsList[0]),
+TextObject(None, 20, (255, 255, 255), "Лучше бы гроб здесь поставили :D", 1, bedroomIntersectionObjectsList[1]),
+TextObject(None, 20, (255, 255, 255), "Боль, дебаг, страдания", 1, bedroomIntersectionObjectsList[2])]
 bedroomExitObjectsList = [[GameObject(264, 153, 109, 223), "library"]]
 
 locationObjectsList["bedroom"].setGameField(GameObject(0, 374, 1024, 374))
@@ -36,7 +36,7 @@ locationObjectsList["bedroom"].setTextObjectsList(bedroomTextObjectsList)
 #БИБЛИОТЕКА
 libraryIntersectionObjectsList = [GameObject(164, 459, 383-164, 593-459)]
 libraryExitObjectsList = [[GameObject(271, 752, 600, 100), "bedroom"]]
-libraryTextObjectsList = [TextObject(None, 30, (255, 255, 255), "Грусть, печаль, тоска", 1, libraryIntersectionObjectsList[0])]
+libraryTextObjectsList = [TextObject(None, 20, (255, 255, 255), "Грусть, печаль, тоска", 1, libraryIntersectionObjectsList[0])]
 
 locationObjectsList["library"].setGameField(GameObject(60, 400, 905, 367))
 locationObjectsList["library"].setIntersectionObjectsList(libraryIntersectionObjectsList)

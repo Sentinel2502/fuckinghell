@@ -1,4 +1,4 @@
-"Главный файл для запуска программы"
+"Главный файл для запуска программы. Нужен для отладки функций движка"
 
 import pygame, sys
 from gameObject import *
@@ -74,23 +74,18 @@ while True:
     if pressed[pygame.K_ESCAPE]:
         isInventory = False
 
-    #Вывожу на экран текст об объекте с кот. соприкасаюсь и меню
-    #screen.blit(currentTextMessage.text, (logo.x + logo.width//2, logo.y - logo.width - 10))
-    #if isInventory:
-    #    screen.blit(inventorySlotObject.image, (512 - inventorySlotObject.width//2, 384 - inventorySlotObject.height//2))
-
-    #проверяю персонажа на предмет столкновения с текстовыми зонами
     for i in range(len(background.textObjectsList)):
         if logo.intersects(background.textObjectsList[i].object, 10):
-            screen.blit(currentTextMessage.text, (logo.x + logo.width//2, logo.y - logo.width - 10))
             if pressed[pygame.K_e]:
-                currentTextMessage = background.textObjectsList[i]
-            elif currentTextMessage != background.textObjectsList[i]:
+                background.textObjectsList[i].setIsVisible(1)
+            elif background.textObjectsList[i].isVisible == 1:
+                background.textObjectsList[i].draw(logo, screen)
+            else:
                 background.textObjectsList[i].ask(logo, screen, pygame.image.load("images/icons/eye.png"))
-        
+        else:
+            background.textObjectsList[i].setIsVisible(0)
 
-    #Вывожу на экран текст об объекте с кот. соприкасаюсь и меню
-    #screen.blit(currentTextMessage.text, (logo.x + logo.width//2, logo.y - logo.width - 10))
+    #инвентарь
     if isInventory:
         screen.blit(inventoryObject.image, (512 - inventoryObject.width//2, 384 - inventoryObject.height//2))
 
