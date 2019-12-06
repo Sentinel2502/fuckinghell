@@ -4,6 +4,7 @@ import pygame, sys
 from gameObject import *
 from locations import *
 from information import *
+from invSlotObject import *
 
 #Initialize pygame
 pygame.init()
@@ -29,7 +30,6 @@ while True:
 
     #задаю координаты гг
     logo.setPosition(x, y)
-    pressed = pygame.key.get_pressed()
 
     #реализую перемещение персонажа
     pressed = pygame.key.get_pressed()
@@ -79,8 +79,15 @@ while True:
         if background.itemObjectsList[i].isVisible:
             screen.blit(background.itemObjectsList[i].image, (background.itemObjectsList[i].x, background.itemObjectsList[i].y))
         if logo.intersects(background.itemObjectsList[i], 10) and background.itemObjectsList[i].isVisible:
+            if invSlots[len(invSlots)-1].isFull:
+                break
             if pressed[pygame.K_e]:
                 background.itemObjectsList[i].setIsVisible(0)
+                for j in range(len(invSlots)-1):
+                    if not invSlots[j+1].isFull:
+                        invSlots[j+1].setItem(background.itemObjectsList[i])
+                        invSlots[j+1].setIsFull(1)
+                        break
             else:
                 background.itemObjectsList[i].ask(logo, screen, pygame.image.load("images/icons/hand.png"))
 
@@ -93,6 +100,15 @@ while True:
     if pressed[pygame.K_ESCAPE]:
         isInventory = False
 
+
+    #вывожу инвентарь на экран
+    if isInventory:
+        screen.blit(inv.image, (windowSize[0]//2 - inv.width//2, windowSize[1]//2 - inv.height//2))
+        for i in range(len(invSlots)):
+            if invSlots[i].isFull:
+                invSlots[i].drawItem(screen)
+
+
     #Проверяю гг на предмет пересечения с текстовыми зонами, если есть нажатие, вывожу текст на экран
     for i in range(len(background.textObjectsList)):
         if logo.intersects(background.textObjectsList[i].object, 10):
@@ -104,9 +120,5 @@ while True:
                 background.textObjectsList[i].ask(logo, screen, pygame.image.load("images/icons/eye.png"))
         else:
             background.textObjectsList[i].setIsVisible(0)
-
-    #вывожу инвентарь на экран
-    if isInventory:
-        screen.blit(inventoryObject.image, (512 - inventoryObject.width//2, 384 - inventoryObject.height//2))
 
     pygame.display.update()
