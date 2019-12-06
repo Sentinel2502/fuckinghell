@@ -52,7 +52,7 @@ InvItemObject(200+11, 300+4, 19, 35, pygame.image.load("images/objects/candle.pn
 locationObjectsList["library"].setGameField(GameObject(60, 400, 905, 367))
 locationObjectsList["library"].setIntersectionObjectsList(libraryIntersectionObjectsList)
 locationObjectsList["library"].setExitObjectsList(libraryExitObjectsList)
-locationObjectsList["library"].setExitPoint((306, 680))
+locationObjectsList["library"].setExitPoint((700, 1000))
 locationObjectsList["library"].setTextObjectsList(libraryTextObjectsList)
 locationObjectsList["library"].setItemObjectsList(libraryItemObjectsList)
 

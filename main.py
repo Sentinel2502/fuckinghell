@@ -14,9 +14,7 @@ screen = pygame.display.set_mode(windowSize)
 pygame.mouse.set_visible(0)
 
 #Resources
-character = pygame.image.load("images/characters/char.png")
 background = locationObjectsList["bedroom"]
-characterSize = character.get_size()
 currentTextMessage = TextObject(None, 10, (0, 0, 0), "", 1, logo)
 isInventory = False
 
@@ -30,43 +28,6 @@ while True:
 
     #задаю координаты гг
     logo.setPosition(x, y)
-
-    #реализую перемещение персонажа
-    pressed = pygame.key.get_pressed()
-    if pressed[pygame.K_w]:
-        y -= 5
-    if pressed[pygame.K_s]:
-        y += 5
-    if pressed[pygame.K_d]:
-        x += 5
-    if pressed[pygame.K_a]:
-        x -= 5
-
-    #задаю координаты гг
-    logo.setPosition(x, y)
-
-    #проверяю объекты на предмет столкновения с персонажем
-    for i in range(len(background.intersectionObjectsList)):
-        if logo.intersects(background.intersectionObjectsList[i], 0):
-            if pressed[pygame.K_d]:
-                x -= 5
-            if pressed[pygame.K_a]:
-                x += 5
-            if pressed[pygame.K_w]:
-                y += 5
-            if pressed[pygame.K_s]:
-                y -= 5
-
-    #задаю координаты гг
-    logo.setPosition(x, y)
-
-    #проверяю персонажа на предмет столкновения с "выходами"
-    for i in range(len(background.exitObjectsList)):
-        if not logo.intersects(background.exitObjectsList[i][0], 0):
-            pass
-        else:
-            background = locationObjectsList[background.exitObjectsList[i][1]]
-            x, y = background.exit_x, background.exit_y
 
     #проверяем нахождение персонажа в границах игровой зоны
     x, y = background.checkIfOutBoundary(character, (x, y))
@@ -91,8 +52,46 @@ while True:
             else:
                 background.itemObjectsList[i].ask(logo, screen, pygame.image.load("images/icons/hand.png"))
 
+    #реализую перемещение персонажа и "рисую" на экране персонажа
+    pressed = pygame.key.get_pressed()
+    if pressed[pygame.K_w]:
+        y -= 5
+    if pressed[pygame.K_s]:
+        y += 5
+    if pressed[pygame.K_d]:
+        x += 5
+    if pressed[pygame.K_a]:
+        x -= 5
+
+    #задаю координаты гг
+    logo.setPosition(x, y)
+
     #"рисую" на экране персонажа
     screen.blit(character, (x, y))
+
+    #проверяю объекты на предмет столкновения с персонажем
+    for i in range(len(background.intersectionObjectsList)):
+        if logo.intersects(background.intersectionObjectsList[i], 0):
+            if pressed[pygame.K_d]:
+                x -= 5
+            if pressed[pygame.K_a]:
+                x += 5
+            if pressed[pygame.K_w]:
+                y += 5
+            if pressed[pygame.K_s]:
+                y -= 5
+
+    #задаю координаты гг
+    logo.setPosition(x, y)
+
+    #проверяю персонажа на предмет столкновения с "выходами"
+    for i in range(len(background.exitObjectsList)):
+        if not logo.intersects(background.exitObjectsList[i][0], 0):
+            pass
+        else:
+            background = locationObjectsList[background.exitObjectsList[i][1]]
+            x, y = background.exit_x, background.exit_y
+            logo.setPosition(x, y)
 
     #Проверяю, нажати ли кнопка вызова инвенторя
     if pressed[pygame.K_q]:
