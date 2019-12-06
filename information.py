@@ -5,6 +5,7 @@ from gameObject import *
 from locations import *
 from textObject import *
 from invItemObject import *
+from invSlotObject import *
 
 pygame.init()
 
@@ -42,7 +43,11 @@ libraryIntersectionObjectsList = [GameObject(164, 459, 383-164, 593-459)]
 libraryExitObjectsList = [[GameObject(271, 752, 600, 100), "bedroom"]]
 libraryTextObjectsList = [TextObject(None, 20, (255, 255, 255), "Грусть, печаль, тоска", 1, libraryIntersectionObjectsList[0])]
 libraryItemObjectsList = [InvItemObject(616+11, 464+4, 19, 35, pygame.image.load("images/objects/candle.png"), 1),
-InvItemObject(400+11, 464+4, 19, 35, pygame.image.load("images/objects/candle.png"), 1)]
+InvItemObject(400+11, 464+4, 19, 35, pygame.image.load("images/objects/candle.png"), 1),
+InvItemObject(300+11, 500+4, 19, 35, pygame.image.load("images/objects/candle.png"), 1),
+InvItemObject(200+11, 700+4, 19, 35, pygame.image.load("images/objects/candle.png"), 1),
+InvItemObject(300+11, 400+4, 19, 35, pygame.image.load("images/objects/candle.png"), 1),
+InvItemObject(200+11, 300+4, 19, 35, pygame.image.load("images/objects/candle.png"), 1)]
 
 locationObjectsList["library"].setGameField(GameObject(60, 400, 905, 367))
 locationObjectsList["library"].setIntersectionObjectsList(libraryIntersectionObjectsList)
@@ -52,15 +57,13 @@ locationObjectsList["library"].setTextObjectsList(libraryTextObjectsList)
 locationObjectsList["library"].setItemObjectsList(libraryItemObjectsList)
 
 #ИНВЕНТАРЬ
-inventoryObject = GameObject(1024, 768, 272, 384)
-inventoryObject.setImage(pygame.image.load("images/icons/inventory.png"))
-inventorySlotObject = GameObject(1024, 768, 272, 384)
-inventorySlotObject.setImage(pygame.image.load("images/icons/inventory.png"))
-inventory = [
-GameObject(19 + inventorySlotObject.x, 32 + inventorySlotObject.y, 231, 164),
-GameObject(17 + inventorySlotObject.x, 235 + inventorySlotObject.y, 62, 54),
-GameObject(102 + inventorySlotObject.x, 235 + inventorySlotObject.y, 62, 54),
-GameObject(187 + inventorySlotObject.x, 235 + inventorySlotObject.y, 62, 54),
-GameObject(17 + inventorySlotObject.x, 304 + inventorySlotObject.y, 62, 54),
-GameObject(102 + inventorySlotObject.x, 304 + inventorySlotObject.y, 62, 54),
-GameObject(187 + inventorySlotObject.x, 304 + inventorySlotObject.y, 62, 54)]
+inv = GameObject(1024, 768, 272, 384)
+inv.setImage(pygame.image.load("images/icons/inventory.png"))
+invSlots = [
+InvSlotObject(19 + inv.x//2 - inv.width//2, 32 + inv.y//2 - inv.height//2, 231, 164),
+InvSlotObject(17 + inv.x//2 - inv.width//2, 235 + inv.y//2 - inv.height//2, 62, 54),
+InvSlotObject(102 + inv.x//2 - inv.width//2, 235 + inv.y//2 - inv.height//2, 62, 54),
+InvSlotObject(187 + inv.x//2 - inv.width//2, 235 + inv.y//2 - inv.height//2, 62, 54),
+InvSlotObject(17 + inv.x//2 - inv.width//2, 304 + inv.y//2 - inv.height//2, 62, 54),
+InvSlotObject(102 + inv.x//2 - inv.width//2, 304 + inv.y//2 - inv.height//2, 62, 54),
+InvSlotObject(187 + inv.x//2 - inv.width//2, 304 + inv.y//2 - inv.height//2, 62, 54)]
