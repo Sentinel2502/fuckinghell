@@ -29,46 +29,10 @@ while True:
     #задаю координаты гг
     logo.setPosition(x, y)
 
-    #проверяем нахождение персонажа в границах игровой зоны
-    x, y = background.checkIfOutBoundary(character, (x, y))
-
-    #"рисую на экране" задник
-    screen.blit(background.background, (0, 0))
-
-    #ОБЪЕКТЫ, которые можно взять
-    for i in range(len(background.itemObjectsList)):
-        if background.itemObjectsList[i].isVisible:
-            screen.blit(background.itemObjectsList[i].image, (background.itemObjectsList[i].x, background.itemObjectsList[i].y))
-        if logo.intersects(background.itemObjectsList[i], 10) and background.itemObjectsList[i].isVisible:
-            if invSlots[len(invSlots)-1].isFull:
-                break
-            if pressed[pygame.K_e]:
-                background.itemObjectsList[i].setIsVisible(0)
-                for j in range(len(invSlots)-1):
-                    if not invSlots[j+1].isFull:
-                        invSlots[j+1].setItem(background.itemObjectsList[i])
-                        invSlots[j+1].setIsFull(1)
-                        break
-            else:
-                background.itemObjectsList[i].ask(logo, screen, pygame.image.load("images/icons/hand.png"))
-
-    #реализую перемещение персонажа и "рисую" на экране персонажа
-    pressed = pygame.key.get_pressed()
-    if pressed[pygame.K_w]:
-        y -= 5
-    if pressed[pygame.K_s]:
-        y += 5
-    if pressed[pygame.K_d]:
-        x += 5
-    if pressed[pygame.K_a]:
-        x -= 5
-
-    #"рисую" на экране персонажа
-    screen.blit(character, (x, y))
-
     #проверяю объекты на предмет столкновения с персонажем
     for i in range(len(background.intersectionObjectsList)):
         if logo.intersects(background.intersectionObjectsList[i], 0):
+            pressed = pygame.key.get_pressed()
             if pressed[pygame.K_d]:
                 x -= 5
             if pressed[pygame.K_a]:
@@ -86,20 +50,48 @@ while True:
             background = locationObjectsList[background.exitObjectsList[i][1]]
             x, y = background.exit_x, background.exit_y
 
+    #проверяем нахождение персонажа в границах игровой зоны
+    x, y = background.checkIfOutBoundary(character, (x, y))
+
+    #"рисую на экране" задник
+    screen.blit(background.background, (0, 0))
+
+    #ОБЪЕКТЫ, которые можно взять
+    """for i in range(len(background.itemObjectsList)):
+        if background.itemObjectsList[i].isVisible:
+            screen.blit(background.itemObjectsList[i].image, (background.itemObjectsList[i].x, background.itemObjectsList[i].y))
+        if logo.intersects(background.itemObjectsList[i], 10) and background.itemObjectsList[i].isVisible:
+            if invSlots[len(invSlots)-1].isFull:
+                break
+            if pressed[pygame.K_e]:
+                background.itemObjectsList[i].setIsVisible(0)
+                for j in range(len(invSlots)-1):
+                    if not invSlots[j+1].isFull:
+                        invSlots[j+1].setItem(background.itemObjectsList[i])
+                        invSlots[j+1].setIsFull(1)
+                        break
+            else:
+                background.itemObjectsList[i].ask(logo, screen, pygame.image.load("images/icons/hand.png"))"""
+
+    #"рисую" на экране персонажа
+    screen.blit(character, (x, y))
+
+    #реализую перемещение персонажа
+    pressed = pygame.key.get_pressed()
+    if pressed[pygame.K_w]:
+        y -= 5
+    if pressed[pygame.K_s]:
+        y += 5
+    if pressed[pygame.K_d]:
+        x += 5
+    if pressed[pygame.K_a]:
+        x -= 5
+
     #Проверяю, нажати ли кнопка вызова инвенторя
     if pressed[pygame.K_q]:
         isInventory = True
     if pressed[pygame.K_ESCAPE]:
         isInventory = False
-
-
-    #вывожу инвентарь на экран
-    if isInventory:
-        screen.blit(inv.image, (windowSize[0]//2 - inv.width//2, windowSize[1]//2 - inv.height//2))
-        for i in range(len(invSlots)):
-            if invSlots[i].isFull:
-                invSlots[i].drawItem(screen)
-
 
     #Проверяю гг на предмет пересечения с текстовыми зонами, если есть нажатие, вывожу текст на экран
     for i in range(len(background.textObjectsList)):
@@ -112,5 +104,12 @@ while True:
                 background.textObjectsList[i].ask(logo, screen, pygame.image.load("images/icons/eye.png"))
         else:
             background.textObjectsList[i].setIsVisible(0)
+
+    #вывожу инвентарь на экран
+    if isInventory:
+        screen.blit(inv.image, (windowSize[0]//2 - inv.width//2, windowSize[1]//2 - inv.height//2))
+        for i in range(len(invSlots)):
+            if invSlots[i].isFull:
+                invSlots[i].drawItem(screen)
 
     pygame.display.update()
