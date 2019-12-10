@@ -63,9 +63,6 @@ while True:
     if pressed[pygame.K_a]:
         x -= 5
 
-    #задаю координаты гг
-    logo.setPosition(x, y)
-
     #"рисую" на экране персонажа
     screen.blit(character, (x, y))
 
@@ -81,9 +78,6 @@ while True:
             if pressed[pygame.K_s]:
                 y -= 5
 
-    #задаю координаты гг
-    logo.setPosition(x, y)
-
     #проверяю персонажа на предмет столкновения с "выходами"
     for i in range(len(background.exitObjectsList)):
         if not logo.intersects(background.exitObjectsList[i][0], 0):
@@ -91,7 +85,6 @@ while True:
         else:
             background = locationObjectsList[background.exitObjectsList[i][1]]
             x, y = background.exit_x, background.exit_y
-            logo.setPosition(x, y)
 
     #Проверяю, нажати ли кнопка вызова инвенторя
     if pressed[pygame.K_q]:
