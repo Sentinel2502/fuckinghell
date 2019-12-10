@@ -11,8 +11,16 @@ pygame.init()
 
 #данные о персонаже
 x, y = 710, 575
-character = pygame.image.load("images/characters/char.png")
-characterSize = character.get_size()
+character = {"charStand": pygame.image.load("images/characters/charStand.png"),
+"charFor1": pygame.image.load("images/characters/charFor1.png"),
+"charFor2": pygame.image.load("images/characters/charFor2.png"),
+"charBack1": pygame.image.load("images/characters/charBack1.png"),
+"charBack2": pygame.image.load("images/characters/charBack2.png"),
+"charLeft2": pygame.image.load("images/characters/charLeft2.png"),
+"charLeft1": pygame.image.load("images/characters/charLeft1.png"),
+"charRight1": pygame.image.load("images/characters/charRight1.png"),
+"charRight2": pygame.image.load("images/characters/charRight2.png")}
+characterSize = character["charStand"].get_size()
 logo = GameObject(x, y, characterSize[0], characterSize[1])
 
 #cписок локаций
@@ -52,7 +60,7 @@ InvItemObject(200+11, 300+4, 19, 35, pygame.image.load("images/objects/candle.pn
 locationObjectsList["library"].setGameField(GameObject(60, 400, 905, 367))
 locationObjectsList["library"].setIntersectionObjectsList(libraryIntersectionObjectsList)
 locationObjectsList["library"].setExitObjectsList(libraryExitObjectsList)
-locationObjectsList["library"].setExitPoint((700, 1000))
+locationObjectsList["library"].setExitPoint((700, 500))
 locationObjectsList["library"].setTextObjectsList(libraryTextObjectsList)
 locationObjectsList["library"].setItemObjectsList(libraryItemObjectsList)
 
