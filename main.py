@@ -57,7 +57,7 @@ while True:
     screen.blit(background.background, (0, 0))
 
     #ОБЪЕКТЫ, которые можно взять
-    """for i in range(len(background.itemObjectsList)):
+    for i in range(len(background.itemObjectsList)):
         if background.itemObjectsList[i].isVisible:
             screen.blit(background.itemObjectsList[i].image, (background.itemObjectsList[i].x, background.itemObjectsList[i].y))
         if logo.intersects(background.itemObjectsList[i], 10) and background.itemObjectsList[i].isVisible:
@@ -71,7 +71,7 @@ while True:
                         invSlots[j+1].setIsFull(1)
                         break
             else:
-                background.itemObjectsList[i].ask(logo, screen, pygame.image.load("images/icons/hand.png"))"""
+                background.itemObjectsList[i].ask(logo, screen, pygame.image.load("images/icons/hand.png"))
 
     #"рисую" на экране персонажа
     screen.blit(character, (x, y))
