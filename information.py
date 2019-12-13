@@ -11,17 +11,20 @@ pygame.init()
 
 #данные о персонаже
 x, y = 710, 575
+speed = 5
 character = {"charStand": pygame.image.load("images/characters/charStand.png"),
-"charFor1": pygame.image.load("images/characters/charFor1.png"),
-"charFor2": pygame.image.load("images/characters/charFor2.png"),
-"charBack1": pygame.image.load("images/characters/charBack1.png"),
-"charBack2": pygame.image.load("images/characters/charBack2.png"),
-"charLeft2": pygame.image.load("images/characters/charLeft2.png"),
-"charLeft1": pygame.image.load("images/characters/charLeft1.png"),
-"charRight1": pygame.image.load("images/characters/charRight1.png"),
-"charRight2": pygame.image.load("images/characters/charRight2.png")}
+"charFor": [pygame.image.load("images/characters/charFor1.png"), pygame.image.load("images/characters/charFor2.png")],
+"charBack": [pygame.image.load("images/characters/charBack1.png"), pygame.image.load("images/characters/charBack2.png")],
+"charLeft": [pygame.image.load("images/characters/charLeft2.png"), pygame.image.load("images/characters/charLeft1.png")],
+"charRight": [pygame.image.load("images/characters/charRight1.png"), pygame.image.load("images/characters/charRight2.png")]}
 characterSize = character["charStand"].get_size()
 logo = GameObject(x, y, characterSize[0], characterSize[1])
+fps = 10
+spriteAm = 2
+spriteList = []
+for  i in range(spriteAm):
+    for j in range(fps):
+        spriteList.append(i)
 
 #cписок локаций
 locationObjectsList = {
