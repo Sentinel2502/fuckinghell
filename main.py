@@ -18,15 +18,11 @@ background = locationObjectsList["bedroom"]
 currentTextMessage = TextObject(None, 10, (0, 0, 0), "", 1, logo)
 isInventory = False
 
-#переменные, обеспечивающие смену власти
-altFor = 1
-altBack = 1
-altLeft = 1
-altRight = 1
-freq = 10 #то есть кадр анимации ходьбы персонажа сменяется каждые 10 кадров
-freqStep = -10
-
 clock = pygame.time.Clock()
+
+#переменные, обеспечивающие смену спрайтов анимации ходьбы
+curSprite = 0
+
 
 while True:
     clock.tick(30)
@@ -84,38 +80,25 @@ while True:
     pressed = pygame.key.get_pressed()
     if not pressed[pygame.K_w] and not pressed[pygame.K_s] and not pressed[pygame.K_d] and not pressed[pygame.K_a]:
         screen.blit(character["charStand"], (x, y))
+    else:
+        if curSprite + 1 > len(spriteList)-1:
+            curSprite = 0
     if pressed[pygame.K_w]:
-        y -= 5
-        if altFor:
-            screen.blit(character["charBack1"], (x, y))
-            altFor = 0
-        else:
-            screen.blit(character["charBack2"], (x, y))
-            altFor = 1
+        y -= speed
+        screen.blit(character["charBack"][spriteList[curSprite]], (x, y))
+        curSprite += 1
     if pressed[pygame.K_s]:
-        y += 5
-        if altBack:
-            screen.blit(character["charFor1"], (x, y))
-            altBack = 0
-        else:
-            screen.blit(character["charFor2"], (x, y))
-            altBack = 1
+        y += speed
+        screen.blit(character["charFor"][spriteList[curSprite]], (x, y))
+        curSprite += 1
     if pressed[pygame.K_d]:
-        x += 5
-        if altRight:
-            screen.blit(character["charRight1"], (x, y))
-            altRight = 0
-        else:
-            screen.blit(character["charRight2"], (x, y))
-            altRight = 1
+        x += speed
+        screen.blit(character["charRight"][spriteList[curSprite]], (x, y))
+        curSprite += 1
     if pressed[pygame.K_a]:
-        x -= 5
-        if altLeft:
-            screen.blit(character["charLeft1"], (x, y))
-            altLeft = 0
-        else:
-            screen.blit(character["charLeft2"], (x, y))
-            altLeft = 1
+        x -= speed
+        screen.blit(character["charLeft"][spriteList[curSprite]], (x, y))
+        curSprite += 1
 
     #Проверяю, нажати ли кнопка вызова инвенторя
     if pressed[pygame.K_q]:
