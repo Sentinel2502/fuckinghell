@@ -23,6 +23,8 @@ clock = pygame.time.Clock()
 #переменные, обеспечивающие смену спрайтов анимации ходьбы
 curSprite = 0
 
+#переменные для диалога
+isDialogue = 0
 
 while True:
     clock.tick(30)
@@ -75,6 +77,35 @@ while True:
                         break
             else:
                 background.itemObjectsList[i].ask(logo, screen, pygame.image.load("images/icons/hand.png"))
+
+    #отрисовываю npc и проверяю персонажа на столкновение с ними
+    for i in range(len(background.npcList)):
+        screen.blit(background.npcList[i].npcGameObject.image, (background.npcList[i].npcGameObject.x, background.npcList[i].npcGameObject.y))
+        if logo.intersects(background.npcList[i].npcGameObject, 0):
+            if pressed[pygame.K_d]:
+                x -= 5
+            if pressed[pygame.K_a]:
+                x += 5
+            if pressed[pygame.K_w]:
+                y += 5
+            if pressed[pygame.K_s]:
+                y -= 5
+
+    #реализую диалог с npc
+    for i in range(len(background.npcList)):
+        if logo.intersects(background.npcList[i].npcGameObject, 10):
+            if pressed[pygame.K_e]:
+                isDialogue = 1
+            elif pressed[pygame.K_ESCAPE]:
+                isDialogue = 0
+            elif not isDialogue:
+                background.npcList[i].ask(logo, screen, pygame.image.load("images/icons/dialogue.png"))
+
+            if isDialogue:
+                background.npcList[i].draw(background.npcList[i].currMessage, logo, screen)
+
+        else:
+            isDialogue = 0
 
     #реализую перемещение персонажа
     pressed = pygame.key.get_pressed()

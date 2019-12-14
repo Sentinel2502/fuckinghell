@@ -3,7 +3,8 @@ import pygame
 from textObject import *
 pygame.init()
 
-class message(textObject):
-    def __init__(self, textObject, triggerList):
-        self.textObject = textObject
+class message(TextObject):
+    def __init__(self, textObj, triggerList, id):
+        self.textObj = textObj
         self.triggerList = triggerList
+        self.id = id

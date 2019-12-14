@@ -3,9 +3,10 @@
 import pygame
 from gameObject import *
 from locations import *
-from textObject import *
 from invItemObject import *
 from invSlotObject import *
+from message import *
+from npc import *
 
 pygame.init()
 
@@ -33,6 +34,18 @@ locationObjectsList = {
 
 
 #СПАЛЬНЯ
+#персонажи спальни
+#horror
+horrorObj = GameObject(374, 565, 150, 200)
+horrorObj.setImage(pygame.image.load("images/npc/horror.png"))
+horrorQue = [message(TextObject(None, 20, (255, 255, 255), "Пх’нглуи мглв’нафх Ктулху Р’льех вгах’нагл фхтагн", 1, horrorObj), [0], "фхтагн")]
+horrorAns = [message(TextObject(None, 20, (255, 255, 255), "...", 1, horrorObj), [0], "..."),
+message(TextObject(None, 20, (255, 255, 255), "Звучит серьезно", 1, horrorObj), [0], "серьезный")]
+horror = npc(horrorObj, TextObject(None, 20, (255, 255, 255), "Неописуемый ужас:", 1, horrorObj), horrorQue, horrorAns)
+horror.setStartText(horrorQue[0])
+horror.setCurr(horrorQue[0])
+
+npcList = [horror]
 bedroomIntersectionObjectsList = [GameObject(13, 550, 280, 204), GameObject(625, 324, 268, 107), GameObject(900, 92, 219, 542-92)]
 bedroomTextObjectsList = [TextObject(None, 20, (255, 255, 255), "Куча мусора", 1, bedroomIntersectionObjectsList[0]),
 TextObject(None, 20, (255, 255, 255), "Лучше бы гроб здесь поставили :D", 1, bedroomIntersectionObjectsList[1]),
@@ -47,11 +60,7 @@ locationObjectsList["bedroom"].setExitObjectsList(bedroomExitObjectsList)
 locationObjectsList["bedroom"].setExitPoint((268, 384))
 locationObjectsList["bedroom"].setTextObjectsList(bedroomTextObjectsList)
 locationObjectsList["bedroom"].setItemObjectsList(bedroomItemObjectsList)
-
-#персонажи спальни
-#horror
-horror = GameObject(374, 565, 150, 200)
-horror.setImage(pygame.image.load("images/npc/horror.png"))
+locationObjectsList["bedroom"].setNpcList(npcList)
 
 #БИБЛИОТЕКА
 libraryIntersectionObjectsList = [GameObject(164, 459, 383-164, 593-459)]
