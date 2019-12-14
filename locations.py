@@ -34,6 +34,9 @@ class LocationObject:
     def setItemObjectsList(self, itemObjectsList): #задает список предметов, которые можно поднять
         self.itemObjectsList = itemObjectsList
 
+    def setNpcList(self, npcList): #задает список npc, находящихся на локации
+        self.npcList = npcList
+
     def checkIfOutBoundary(self, character, coordinates): #проверяет, находится ли персонаж в границах экрана (character - спрайт персонажа)
         x = coordinates[0]
         y = coordinates[1]

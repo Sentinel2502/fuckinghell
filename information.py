@@ -48,6 +48,10 @@ locationObjectsList["bedroom"].setExitPoint((268, 384))
 locationObjectsList["bedroom"].setTextObjectsList(bedroomTextObjectsList)
 locationObjectsList["bedroom"].setItemObjectsList(bedroomItemObjectsList)
 
+#персонажи спальни
+#horror
+horror = GameObject(374, 565, 150, 200)
+horror.setImage(pygame.image.load("images/npc/horror.png"))
 
 #БИБЛИОТЕКА
 libraryIntersectionObjectsList = [GameObject(164, 459, 383-164, 593-459)]
