@@ -17,6 +17,9 @@ class GameObject:
     def setImage(self, image):
         self.image = image
 
+    def setName(self, name):
+        self.name = name
+
     def intersectsY(self, other, margin):
         y = other.y
         height = other.height

@@ -8,3 +8,6 @@ class message(TextObject):
         self.textObj = textObj
         self.triggerList = triggerList
         self.id = id
+
+    def setOtherMessageList(self, otherMessageList):
+        self.otherMessageList = otherMessageList

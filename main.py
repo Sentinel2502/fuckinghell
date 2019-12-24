@@ -102,7 +102,10 @@ while True:
                 background.npcList[i].ask(logo, screen, pygame.image.load("images/icons/dialogue.png"))
 
             if isDialogue:
-                background.npcList[i].draw(background.npcList[i].currMessage, logo, screen)
+                background.npcList[i].draw(background.npcList[i].currMessage, background.npcList[i].npcGameObject, "npc", screen)
+                background.npcList[i].draw(background.npcList[i].currAnswer, logo, "gameObject", screen)
+                for j in range(len(background.npcList[i].ansList)):
+                    pass
 
         else:
             isDialogue = 0

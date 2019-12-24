@@ -26,6 +26,7 @@ spriteList = []
 for  i in range(spriteAm):
     for j in range(fps):
         spriteList.append(i)
+logo.setName(TextObject(None, 20, (255, 255, 255), "Вы:", 1, logo))
 
 #cписок локаций
 locationObjectsList = {
@@ -38,14 +39,15 @@ locationObjectsList = {
 #horror
 horrorObj = GameObject(374, 565, 150, 200)
 horrorObj.setImage(pygame.image.load("images/npc/horror.png"))
-horrorQue = [message(TextObject(None, 20, (255, 255, 255), "Пх’нглуи мглв’нафх Ктулху Р’льех вгах’нагл фхтагн", 1, horrorObj), [0], "фхтагн")]
 horrorAns = [message(TextObject(None, 20, (255, 255, 255), "...", 1, horrorObj), [0], "..."),
 message(TextObject(None, 20, (255, 255, 255), "Звучит серьезно", 1, horrorObj), [0], "серьезный")]
+horrorQue = [message(TextObject(None, 20, (255, 255, 255), "Пх’нглуи мглв’нафх Ктулху Р’льех вгах’нагл фхтагн", 1, horrorObj), [0], "фхтагн")]
 horror = npc(horrorObj, TextObject(None, 20, (255, 255, 255), "Неописуемый ужас:", 1, horrorObj), horrorQue, horrorAns)
 horror.setStartText(horrorQue[0])
-horror.setCurr(horrorQue[0])
+horror.setCurrMessage(horrorQue[0])
+horror.setCurrAnswer(horrorAns[0])
 
-npcList = [horror]
+bedroomNpcList = [horror]
 bedroomIntersectionObjectsList = [GameObject(13, 550, 280, 204), GameObject(625, 324, 268, 107), GameObject(900, 92, 219, 542-92)]
 bedroomTextObjectsList = [TextObject(None, 20, (255, 255, 255), "Куча мусора", 1, bedroomIntersectionObjectsList[0]),
 TextObject(None, 20, (255, 255, 255), "Лучше бы гроб здесь поставили :D", 1, bedroomIntersectionObjectsList[1]),
@@ -60,9 +62,10 @@ locationObjectsList["bedroom"].setExitObjectsList(bedroomExitObjectsList)
 locationObjectsList["bedroom"].setExitPoint((268, 384))
 locationObjectsList["bedroom"].setTextObjectsList(bedroomTextObjectsList)
 locationObjectsList["bedroom"].setItemObjectsList(bedroomItemObjectsList)
-locationObjectsList["bedroom"].setNpcList(npcList)
+locationObjectsList["bedroom"].setNpcList(bedroomNpcList)
 
 #БИБЛИОТЕКА
+libraryNpcList = []
 libraryIntersectionObjectsList = [GameObject(164, 459, 383-164, 593-459)]
 libraryExitObjectsList = [[GameObject(271, 752, 600, 100), "bedroom"]]
 libraryTextObjectsList = [TextObject(None, 20, (255, 255, 255), "Грусть, печаль, тоска", 1, libraryIntersectionObjectsList[0])]
@@ -79,6 +82,7 @@ locationObjectsList["library"].setExitObjectsList(libraryExitObjectsList)
 locationObjectsList["library"].setExitPoint((700, 500))
 locationObjectsList["library"].setTextObjectsList(libraryTextObjectsList)
 locationObjectsList["library"].setItemObjectsList(libraryItemObjectsList)
+locationObjectsList["library"].setNpcList(libraryNpcList)
 
 #ИНВЕНТАРЬ
 inv = GameObject(1024, 768, 272, 384)
