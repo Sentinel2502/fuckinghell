@@ -7,8 +7,10 @@ from invItemObject import *
 from invSlotObject import *
 from message import *
 from npc import *
+from wrapline import *
 
 pygame.init()
+pygame.font.init()
 
 #данные о персонаже
 x, y = 710, 575
@@ -26,7 +28,7 @@ spriteList = []
 for  i in range(spriteAm):
     for j in range(fps):
         spriteList.append(i)
-logo.setName(TextObject(None, 20, (255, 255, 255), "Вы:", 1, logo))
+logo.setName(TextObject(None, 25, (255, 255, 255), "Вы:", 1, logo))
 
 #cписок локаций
 locationObjectsList = {
@@ -39,10 +41,14 @@ locationObjectsList = {
 #horror
 horrorObj = GameObject(374, 565, 150, 200)
 horrorObj.setImage(pygame.image.load("images/npc/horror.png"))
+
 horrorAns = [message(TextObject(None, 20, (255, 255, 255), "...", 1, horrorObj), [0], "..."),
 message(TextObject(None, 20, (255, 255, 255), "Звучит серьезно", 1, horrorObj), [0], "серьезный")]
-horrorQue = [message(TextObject(None, 20, (255, 255, 255), "Пх’нглуи мглв’нафх Ктулху Р’льех вгах’нагл фхтагн", 1, horrorObj), [0], "фхтагн")]
-horror = npc(horrorObj, TextObject(None, 20, (255, 255, 255), "Неописуемый ужас:", 1, horrorObj), horrorQue, horrorAns)
+
+
+horrorQue = [message(TextObject(None, 20, (255, 255, 255), "Пх’нглуи мглв’нафх КтулхуР’льех вгах’нагл фхтагн", 1, horrorObj), [0], "фхтагн")]
+
+horror = npc(horrorObj, TextObject(None, 25, (255, 255, 255), "Неописуемый ужас:", 1, horrorObj), horrorQue, horrorAns)
 horror.setStartText(horrorQue[0])
 horror.setCurrMessage(horrorQue[0])
 horror.setCurrAnswer(horrorAns[0])
@@ -50,8 +56,8 @@ horror.setCurrAnswer(horrorAns[0])
 bedroomNpcList = [horror]
 bedroomIntersectionObjectsList = [GameObject(13, 550, 280, 204), GameObject(625, 324, 268, 107), GameObject(900, 92, 219, 542-92)]
 bedroomTextObjectsList = [TextObject(None, 20, (255, 255, 255), "Куча мусора", 1, bedroomIntersectionObjectsList[0]),
-TextObject(None, 20, (255, 255, 255), "Лучше бы гроб здесь поставили :D", 1, bedroomIntersectionObjectsList[1]),
-TextObject(None, 20, (255, 255, 255), "Боль, дебаг, страдания", 1, bedroomIntersectionObjectsList[2])]
+TextObject(None, 22, (255, 255, 255), "Лучше бы гроб здесь поставили :D", 1, bedroomIntersectionObjectsList[1]),
+TextObject(None, 22, (255, 255, 255), "Боль, дебаг, страдания", 1, bedroomIntersectionObjectsList[2])]
 bedroomExitObjectsList = [[GameObject(264, 153, 109, 223), "library"]]
 bedroomItemObjectsList = [InvItemObject(616+11, 464+4, 19, 35, pygame.image.load("images/objects/candle.png"), 1),
 InvItemObject(400+11, 464+4, 19, 35, pygame.image.load("images/objects/candle.png"), 1)]

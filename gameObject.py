@@ -1,6 +1,7 @@
 "Реализует коллизию с объектами"
 import pygame
 pygame.init()
+pygame.font.init
 
 
 class GameObject:
@@ -19,6 +20,7 @@ class GameObject:
 
     def setName(self, name):
         self.name = name
+        self.name.font.set_bold(True)
 
     def intersectsY(self, other, margin):
         y = other.y

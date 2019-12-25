@@ -3,9 +3,12 @@
 import pygame
 from gameObject import *
 pygame.init()
+pygame.font.init()
 
 class TextObject(GameObject):
     def __init__(self, fontName, fontSize, color, text, smoothing, object):
+        self.string = text
+        self.fontSize = fontSize
         self.font = pygame.font.Font(fontName, fontSize)
         self.text = self.font.render(text, smoothing, color)
         self.object = object
@@ -16,7 +19,7 @@ class TextObject(GameObject):
 
     def draw(self, other, surface):
         if self.isVisible:
-            surface.blit(self.text, (other.x + other.width//2, other.y - other.width - 10))
+            surface.blit(self.text, (460, 360))
         else:
             pass
 

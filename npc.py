@@ -1,11 +1,13 @@
 "npc"
 import pygame
 pygame.init()
+pygame.font.init()
 
 class npc():
     def __init__(self, npcGameObject, name, queList, ansList):
         self.npcGameObject = npcGameObject
         self.name = name
+        self.name.font.set_bold(1)
         self.queList = queList
         self.ansList = ansList
         self.npcGameObject.setName(self.name)
@@ -15,11 +17,11 @@ class npc():
 
     def draw(self, message, other, mode, surface):
         if mode == "npc":
-            surface.blit(other.name.text, (other.x, other.y - 50))
-            surface.blit(message.textObj.text, (other.x, other.y - 20))
+            surface.blit(other.name.text, (360, 260))
+            surface.blit(message.textObj.text, (360, 280))
         elif mode == "gameObject":
-            surface.blit(other.name.text, (other.x, other.y - 50))
-            surface.blit(message.textObj.text, (other.x, other.y - 20))
+            surface.blit(other.name.text, (360 + 225, 260))
+            surface.blit(message.textObj.text, (360 + 225, 280))
 
     def setStartText(self, textObj):
         self.startText = textObj

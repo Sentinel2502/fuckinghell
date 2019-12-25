@@ -102,6 +102,7 @@ while True:
                 background.npcList[i].ask(logo, screen, pygame.image.load("images/icons/dialogue.png"))
 
             if isDialogue:
+                pygame.draw.rect(screen, (0, 0, 0), (350, 250, 450, 350))
                 background.npcList[i].draw(background.npcList[i].currMessage, background.npcList[i].npcGameObject, "npc", screen)
                 background.npcList[i].draw(background.npcList[i].currAnswer, logo, "gameObject", screen)
                 for j in range(len(background.npcList[i].ansList)):
@@ -146,6 +147,7 @@ while True:
             if pressed[pygame.K_e]:
                 background.textObjectsList[i].setIsVisible(1)
             elif background.textObjectsList[i].isVisible == 1:
+                pygame.draw.rect(screen, (0, 0, 0), (450, 350, 300, 100))
                 background.textObjectsList[i].draw(logo, screen)
             else:
                 background.textObjectsList[i].ask(logo, screen, pygame.image.load("images/icons/eye.png"))
