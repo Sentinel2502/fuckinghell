@@ -4,8 +4,8 @@ from textObject import *
 pygame.init()
 
 class message(TextObject):
-    def __init__(self, textObj, triggerList, id):
-        self.textObj = textObj
+    def __init__(self, textObjList, triggerList, id):
+        self.textObjList = textObjList
         self.triggerList = triggerList
         self.id = id
 

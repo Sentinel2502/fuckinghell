@@ -91,26 +91,6 @@ while True:
             if pressed[pygame.K_s]:
                 y -= 5
 
-    #реализую диалог с npc
-    for i in range(len(background.npcList)):
-        if logo.intersects(background.npcList[i].npcGameObject, 10):
-            if pressed[pygame.K_e]:
-                isDialogue = 1
-            elif pressed[pygame.K_ESCAPE]:
-                isDialogue = 0
-            elif not isDialogue:
-                background.npcList[i].ask(logo, screen, pygame.image.load("images/icons/dialogue.png"))
-
-            if isDialogue:
-                pygame.draw.rect(screen, (0, 0, 0), (350, 250, 450, 350))
-                background.npcList[i].draw(background.npcList[i].currMessage, background.npcList[i].npcGameObject, "npc", screen)
-                background.npcList[i].draw(background.npcList[i].currAnswer, logo, "gameObject", screen)
-                for j in range(len(background.npcList[i].ansList)):
-                    pass
-
-        else:
-            isDialogue = 0
-
     #реализую перемещение персонажа
     pressed = pygame.key.get_pressed()
     if not pressed[pygame.K_w] and not pressed[pygame.K_s] and not pressed[pygame.K_d] and not pressed[pygame.K_a]:
@@ -134,6 +114,26 @@ while True:
         x -= speed
         screen.blit(character["charLeft"][spriteList[curSprite]], (x, y))
         curSprite += 1
+
+    #реализую диалог с npc
+    for i in range(len(background.npcList)):
+        if logo.intersects(background.npcList[i].npcGameObject, 10):
+            if pressed[pygame.K_e]:
+                isDialogue = 1
+            elif pressed[pygame.K_ESCAPE]:
+                isDialogue = 0
+            elif not isDialogue:
+                background.npcList[i].ask(logo, screen, pygame.image.load("images/icons/dialogue.png"))
+
+            if isDialogue:
+                pygame.draw.rect(screen, (0, 0, 0), (350, 250, 450, 350))
+                background.npcList[i].draw(background.npcList[i].currMessage, background.npcList[i].npcGameObject, "npc", screen)
+                background.npcList[i].draw(background.npcList[i].currAnswer, logo, "gameObject", screen)
+                for j in range(len(background.npcList[i].ansList)):
+                    pass
+
+        else:
+            isDialogue = 0
 
     #Проверяю, нажати ли кнопка вызова инвенторя
     if pressed[pygame.K_q]:

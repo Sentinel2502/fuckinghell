@@ -1,4 +1,7 @@
 from itertools import chain
+import pygame
+pygame.init()
+from textObject import *
 
 def truncline(text, font, maxwidth):
         real=len(text)
@@ -29,9 +32,31 @@ def wrapline(text, font, maxwidth):
         nl, done, stext=truncline(text, font, maxwidth)
         wrapped.append(stext.strip())
         text=text[nl:]
+        print("wrapping")
     return wrapped
 
 
 def wrap_multi_line(text, font, maxwidth):
     lines = chain(*(wrapline(line, font, maxwidth) for line in text.splitlines()))
     return list(lines)
+
+def makeTextObjectList(wrapline_args, textObjects_args):
+#(text, font, maxwidth), (fontName, fontSize, color, text, smoothing, object)
+    text = wrapline_args[0]
+    font = wrapline_args[1]
+    maxwidth = wrapline_args[2]
+    fontName = textObjects_args[0]
+    fontSize = textObjects_args[1]
+    color = textObjects_args[2]
+    text = textObjects_args[3]
+    smoothing = textObjects_args[4]
+    object = textObjects_args[5]
+
+    ques = []
+
+    wrapped = wrapline(text, font, maxwidth)
+
+    for i in range(len(wrapped)):
+        ques.append(TextObject(fontName, fontSize, color, wrapped[i], smoothing, object))
+
+    return ques

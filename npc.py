@@ -17,11 +17,24 @@ class npc():
 
     def draw(self, message, other, mode, surface):
         if mode == "npc":
-            surface.blit(other.name.text, (360, 260))
-            surface.blit(message.textObj.text, (360, 280))
+            nx = 360
+            ny = 260
+            sx = 360
+            sy = 280
+            list = self.currMessage.textObjList
         elif mode == "gameObject":
-            surface.blit(other.name.text, (360 + 225, 260))
-            surface.blit(message.textObj.text, (360 + 225, 280))
+            nx = 360 + 225
+            ny = 260
+            sx = 360 + 225
+            sy = 280
+            list = self.currAnswer.textObjList
+
+        surface.blit(other.name.text, (nx, ny))
+
+        for i in range(len(list)):
+            surface.blit(list[i].text, (sx, sy))
+            sy += 10
+
 
     def setStartText(self, textObj):
         self.startText = textObj
