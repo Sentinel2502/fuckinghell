@@ -2,9 +2,13 @@
 import pygame
 pygame.init()
 
-class trigger(self, isActive):
-    self.eventList = eventList
-    self.isActive = isActive
+class trigger():
+    def __init__(self, passiveTriggerList, value, triggerName):
+        self.passiveTriggerList = passiveTriggerList
+        self.value = value
 
-    def setIsActive(self, isActive):
-        self.isActive = isActive
+    def changePassiveTrigger(self, passiveTrigger, value):
+        passiveTrigger = value
+
+    def addPassiveTrigger(self, triggerName, passiveTrigger):
+        self.passiveTriggerList[triggerName] = passiveTrigger
