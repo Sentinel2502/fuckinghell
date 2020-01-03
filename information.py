@@ -12,6 +12,7 @@ from trigger import *
 
 pygame.init()
 pygame.font.init()
+#pygame.mixer.init()
 
 #данные о персонаже
 x, y = 300, 220
@@ -30,6 +31,9 @@ for  i in range(spriteAm):
     for j in range(fps):
         spriteList.append(i)
 logo.setName(TextObject(None, 25, (255, 255, 255), "Вы:", 1, logo))
+
+#загружаю базовые звуки (универсальные для всех локаций)
+#pygame.mixer.music.load('music/walking.mp3')
 
 #cписок локаций
 locationObjectsList = {

@@ -32,12 +32,23 @@ isText = 0
 #костыль (вывод инвенторя)
 diary = pygame.image.load("images/icons/diary.png")
 
+#разворачиваю механизм, отвечающий за отслеживание конца песни
+SONG_END = pygame.USEREVENT + 1
+pygame.mixer.music.set_endevent(SONG_END)
+pygame.mixer.music.load('music/walking.mp3')
+pygame.mixer.music.play(0)
+isEnd = 0
 
 while True:
     clock.tick(30)
 
     for event in pygame.event.get():
-        if event.type == pygame.QUIT: sys.exit()
+        if event.type == pygame.QUIT:
+            sys.exit()
+        if event.type == SONG_END or isEnd:
+            pygame.mixer.music.play()
+            isEnd = 0
+            #pygame.mixer.music.queue('music/walking.mp3')
 
     #задаю координаты гг
     logo.setPosition(x, y)
@@ -102,9 +113,15 @@ while True:
     pressed = pygame.key.get_pressed()
     if not pressed[pygame.K_w] and not pressed[pygame.K_s] and not pressed[pygame.K_d] and not pressed[pygame.K_a]:
         screen.blit(character["charStand"], (x, y))
+        pygame.mixer.music.stop()
+        isEnd = 1
+        #pygame.mixer.music.stop()
     else:
         if curSprite + 1 > len(spriteList)-1:
             curSprite = 0
+        #pygame.mixer.music.queue("music/walking.mp3")
+        #pygame.mixer.music.play()
+
     if pressed[pygame.K_w]:
         y -= speed
         screen.blit(character["charBack"][spriteList[curSprite]], (x, y))
