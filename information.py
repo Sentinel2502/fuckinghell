@@ -54,6 +54,9 @@ locationObjectsList["bedroom"].setItemObjectsList(bedroomItemObjectsList)
 locationObjectsList["bedroom"].setNpcList(bedroomNpcList)
 
 #БИБЛИОТЕКА
+#библиотекарь
+
+
 locationObjectsList["library"].setGameField((0, 0, 1024, 768))
 locationObjectsList["library"].setIntersectionObjectsList([])
 locationObjectsList["library"].setExitObjectsList([])
