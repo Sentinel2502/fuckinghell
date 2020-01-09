@@ -72,6 +72,13 @@ locationObjectsList["bedroom"].setItemObjectsList(bedroomItemObjectsList)
 locationObjectsList["bedroom"].setNpcList(bedroomNpcList)
 
 #БИБЛИОТЕКА
+locationObjectsList["library"].setGameField((0, 0, 1024, 768))
+locationObjectsList["library"].setIntersectionObjectsList([])
+locationObjectsList["library"].setExitObjectsList([])
+locationObjectsList["library"].setExitPoint((268, 384))
+locationObjectsList["library"].setTextObjectsList([])
+locationObjectsList["library"].setItemObjectsList([])
+locationObjectsList["library"].setNpcList([])
 
 #ИНВЕНТАРЬ
 inv = GameObject(1024, 768, 272, 384)

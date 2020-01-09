@@ -12,7 +12,7 @@ screen = pygame.display.set_mode(windowSize)
 pygame.mouse.set_visible(0)
 
 #Resources
-background = locationObjectsList["bedroom"]
+background = locationObjectsList["library"]
 currentTextMessage = TextObject(None, 10, (0, 0, 0), "", 1, logo)
 isInventory = False
 
@@ -107,8 +107,6 @@ while True:
             if pressed[pygame.K_s]:
                 y -= speed
 
-    count = 0
-
     #реализую перемещение персонажа
     pressed = pygame.key.get_pressed()
     if not pressed[pygame.K_w] and not pressed[pygame.K_s] and not pressed[pygame.K_d] and not pressed[pygame.K_a]:
@@ -122,8 +120,6 @@ while True:
         #pygame.mixer.music.queue("music/walking.mp3")
         #pygame.mixer.music.play()
 
-    if pressed[pygame.K_p]:
-        count = 4
     if pressed[pygame.K_w]:
         y -= speed
         screen.blit(character["charBack"][spriteList[curSprite]], (x, y))
@@ -201,11 +197,5 @@ while True:
         for i in range(len(invSlots)):
             if invSlots[i].isFull:
                 invSlots[i].drawItem(screen)
-
-    for i in range(len(background.textObjectsList)):
-        count += background.textObjectsList[i].trigger
-    if count == 4:
-        break
-        #screen.blit(pygame.image.load("images/locations/TheEnd.png"), (0, 0))
 
     pygame.display.update()
