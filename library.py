@@ -11,8 +11,28 @@ windowSize = (1024, 768)
 screen = pygame.display.set_mode(windowSize)
 pygame.mouse.set_visible(0)
 
-#Resources
+#background
 background = locationObjectsList["library"]
+
+#данные о персонаже
+x, y = background.exit_x, background.exit_y
+speed = 5
+character = {"charStand": pygame.image.load("images/characters/thing.png"),
+"charFor": [pygame.image.load("images/characters/thing.png"), pygame.image.load("images/characters/thing.png"), pygame.image.load("images/characters/thing.png")],
+"charBack": [pygame.image.load("images/characters/thing.png"), pygame.image.load("images/characters/thing.png"), pygame.image.load("images/characters/thing.png")],
+"charLeft": [pygame.image.load("images/characters/thing.png"), pygame.image.load("images/characters/thing.png"), pygame.image.load("images/characters/thing.png")],
+"charRight": [pygame.image.load("images/characters/thing.png"), pygame.image.load("images/characters/thing.png"), pygame.image.load("images/characters/thing.png")]}
+characterSize = character["charStand"].get_size()
+logo = GameObject(x, y, characterSize[0], characterSize[1])
+fps = 8
+spriteAm = 3
+spriteList = []
+for  i in range(spriteAm):
+    for j in range(fps):
+        spriteList.append(i)
+logo.setName(TextObject(None, 25, (255, 255, 255), "Вы:", 1, logo))
+
+#Resources
 currentTextMessage = TextObject(None, 10, (0, 0, 0), "", 1, logo)
 isInventory = False
 

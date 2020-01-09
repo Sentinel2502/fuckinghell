@@ -11,8 +11,28 @@ windowSize = (1024, 768)
 screen = pygame.display.set_mode(windowSize)
 pygame.mouse.set_visible(0)
 
-#Resources
+#background
 background = locationObjectsList["bedroom"]
+
+#данные о персонаже
+x, y = background.exit_x, background.exit_y
+speed = 5
+character = {"charStand": pygame.image.load("images/characters/charStand.png"),
+"charFor": [pygame.image.load("images/characters/charStand.png"), pygame.image.load("images/characters/charStand.png"), pygame.image.load("images/characters/charStand.png")],
+"charBack": [pygame.image.load("images/characters/charBack1.png"), pygame.image.load("images/characters/charBack2.png"), pygame.image.load("images/characters/charBack2.png")],
+"charLeft": [pygame.image.load("images/characters/charLeft1.png"), pygame.image.load("images/characters/charLeft2.png"), pygame.image.load("images/characters/charLeft3.png")],
+"charRight": [pygame.image.load("images/characters/charRight1.png"), pygame.image.load("images/characters/charRight2.png"), pygame.image.load("images/characters/charRight3.png")]}
+characterSize = character["charStand"].get_size()
+logo = GameObject(x, y, characterSize[0], characterSize[1])
+fps = 8
+spriteAm = 3
+spriteList = []
+for  i in range(spriteAm):
+    for j in range(fps):
+        spriteList.append(i)
+logo.setName(TextObject(None, 25, (255, 255, 255), "Вы:", 1, logo))
+
+#Resources
 currentTextMessage = TextObject(None, 10, (0, 0, 0), "", 1, logo)
 isInventory = False
 
@@ -202,9 +222,10 @@ while True:
             if invSlots[i].isFull:
                 invSlots[i].drawItem(screen)
 
+    #условие перехода на следующую локацию
     for i in range(len(background.textObjectsList)):
         count += background.textObjectsList[i].trigger
-    if count == 4:
+    if count >= 4:
         break
         #screen.blit(pygame.image.load("images/locations/TheEnd.png"), (0, 0))
 

@@ -14,24 +14,6 @@ pygame.init()
 pygame.font.init()
 #pygame.mixer.init()
 
-#данные о персонаже
-x, y = 300, 220
-speed = 5
-character = {"charStand": pygame.image.load("images/characters/charStand.png"),
-"charFor": [pygame.image.load("images/characters/charStand.png"), pygame.image.load("images/characters/charStand.png"), pygame.image.load("images/characters/charStand.png")],
-"charBack": [pygame.image.load("images/characters/charBack1.png"), pygame.image.load("images/characters/charBack2.png"), pygame.image.load("images/characters/charBack2.png")],
-"charLeft": [pygame.image.load("images/characters/charLeft1.png"), pygame.image.load("images/characters/charLeft2.png"), pygame.image.load("images/characters/charLeft3.png")],
-"charRight": [pygame.image.load("images/characters/charRight1.png"), pygame.image.load("images/characters/charRight2.png"), pygame.image.load("images/characters/charRight3.png")]}
-characterSize = character["charStand"].get_size()
-logo = GameObject(x, y, characterSize[0], characterSize[1])
-fps = 8
-spriteAm = 3
-spriteList = []
-for  i in range(spriteAm):
-    for j in range(fps):
-        spriteList.append(i)
-logo.setName(TextObject(None, 25, (255, 255, 255), "Вы:", 1, logo))
-
 #загружаю базовые звуки (универсальные для всех локаций)
 #pygame.mixer.music.load('music/walking.mp3')
 
@@ -66,7 +48,7 @@ bedroomItemObjectsList = []
 locationObjectsList["bedroom"].setGameField(GameObject(0, 374, 1024, 374))
 locationObjectsList["bedroom"].setIntersectionObjectsList(bedroomIntersectionObjectsList)
 locationObjectsList["bedroom"].setExitObjectsList(bedroomExitObjectsList)
-locationObjectsList["bedroom"].setExitPoint((268, 384))
+locationObjectsList["bedroom"].setExitPoint((200, 300))
 locationObjectsList["bedroom"].setTextObjectsList(bedroomTextObjectsList)
 locationObjectsList["bedroom"].setItemObjectsList(bedroomItemObjectsList)
 locationObjectsList["bedroom"].setNpcList(bedroomNpcList)
@@ -75,7 +57,7 @@ locationObjectsList["bedroom"].setNpcList(bedroomNpcList)
 locationObjectsList["library"].setGameField((0, 0, 1024, 768))
 locationObjectsList["library"].setIntersectionObjectsList([])
 locationObjectsList["library"].setExitObjectsList([])
-locationObjectsList["library"].setExitPoint((268, 384))
+locationObjectsList["library"].setExitPoint((484, 639))
 locationObjectsList["library"].setTextObjectsList([])
 locationObjectsList["library"].setItemObjectsList([])
 locationObjectsList["library"].setNpcList([])
