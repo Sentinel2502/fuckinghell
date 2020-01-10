@@ -144,7 +144,28 @@ while True:
 
     if pressed[pygame.K_p]:
         count = 4
-    if pressed[pygame.K_w]:
+
+    if pressed[pygame.K_w] and pressed[pygame.K_d]:
+        x += speed - speed//3
+        y -= speed - speed//3
+        screen.blit(character["charRight"][spriteList[curSprite]], (x, y))
+        curSprite += 1
+    elif pressed[pygame.K_w] and pressed[pygame.K_a]:
+        x -= speed - speed//3
+        y -= speed - speed//3
+        screen.blit(character["charLeft"][spriteList[curSprite]], (x, y))
+        curSprite += 1
+    elif pressed[pygame.K_s] and pressed[pygame.K_d]:
+        x += speed - speed//3
+        y += speed - speed//3
+        screen.blit(character["charRight"][spriteList[curSprite]], (x, y))
+        curSprite += 1
+    elif pressed[pygame.K_s] and pressed[pygame.K_a]:
+        x -= speed - speed//3
+        y += speed - speed//3
+        screen.blit(character["charLeft"][spriteList[curSprite]], (x, y))
+        curSprite += 1
+    elif pressed[pygame.K_w]:
         y -= speed
         screen.blit(character["charBack"][spriteList[curSprite]], (x, y))
         curSprite += 1
