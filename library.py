@@ -61,10 +61,10 @@ horrorObj.setImage(pygame.image.load("images/npc/horror.png"))
 horrorAns = [message(makeTextObjectList(("*крики ужаса*", pygame.font.Font(None, 22), 100), (None, 20, (255, 255, 255), "*крики ужаса*", 1, logo), 0, 1), [0], "крики ужаса"),
 message(makeTextObjectList(("...", pygame.font.Font(None, 22), 100), (None, 20, (255, 255, 255), "...", 1, horrorObj), 0, 1), [0], "...")]
 
-horrorQue = [message(makeTextObjectList(("Пх’нглуи мглв’нафх КтулхуР’льех вгах’нагл фхтагн", pygame.font.Font(None, 22), 100), (None, 20, (255, 255, 255), "Пх’нглуи мглв’нафх КтулхуР’льех вгах’нагл фхтагн", 1, horrorObj), 0, 1), [0], "фхтагн"),
+horrorQue = [message(makeTextObjectList(("Пх’нглуи мглв’нафх КтулхуР’льех вгах’нагл фхтагн", pygame.font.Font(None, 22), 200), (None, 20, (255, 255, 255), "Пх’нглуи мглв’нафх КтулхуР’льех вгах’нагл фхтагн", 1, horrorObj), 0, 1), [0], "фхтагн"),
 message(makeTextObjectList(("Пх’нглуи мглв’нафх КтулхуР’льех вгах’нагл фхтагн", pygame.font.Font(None, 22), 100), (None, 20, (255, 255, 255), "Ты умрешь!", 1, horrorObj), 0, 1), [0], "смерть")]
 
-horror = npc(horrorObj, TextObject(None, 25, (255, 255, 255), "Неописуемый ужас:", 1, horrorObj), horrorQue, horrorAns)
+horror = npc(horrorObj, TextObject(None, 25, (255, 255, 255), "Библиотекарь:", 1, horrorObj), horrorQue, horrorAns)
 horror.setStartText(horrorQue[0])
 horror.setCurrMessage(horrorQue[0])
 horror.setCurrAnswer(horrorAns[0])
