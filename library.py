@@ -14,23 +14,20 @@ pygame.mouse.set_visible(0)
 #background
 background = locationObjectsList["library"]
 
-#данные о персонаже
+#Данные о персонаже
+if jeck.isCh:
+    logo = jeck
+    spriteList = JespriteList
+    character = Jecharacter
+    print("FUUUUUUUUUCK")
+elif john.isCh:
+    logo = john
+    spriteList = JospriteList
+    character = Jocharacter
+    print("JOOOOOOOOOOHN")
+#print("john", john.isCh, "jeck", jeck.isCh)
+logo.setPosition(background.exit_x, background.exit_y)
 x, y = background.exit_x, background.exit_y
-speed = 5
-character = {"charStand": pygame.image.load("images/characters/thing.png"),
-"charFor": [pygame.image.load("images/characters/thing.png"), pygame.image.load("images/characters/thing.png"), pygame.image.load("images/characters/thing.png")],
-"charBack": [pygame.image.load("images/characters/thing.png"), pygame.image.load("images/characters/thing.png"), pygame.image.load("images/characters/thing.png")],
-"charLeft": [pygame.image.load("images/characters/thing.png"), pygame.image.load("images/characters/thing.png"), pygame.image.load("images/characters/thing.png")],
-"charRight": [pygame.image.load("images/characters/thing.png"), pygame.image.load("images/characters/thing.png"), pygame.image.load("images/characters/thing.png")]}
-characterSize = character["charStand"].get_size()
-logo = GameObject(x, y, characterSize[0], characterSize[1])
-fps = 8
-spriteAm = 3
-spriteList = []
-for  i in range(spriteAm):
-    for j in range(fps):
-        spriteList.append(i)
-logo.setName(TextObject(None, 25, (255, 255, 255), "Вы:", 1, logo))
 
 #Resources
 currentTextMessage = TextObject(None, 10, (0, 0, 0), "", 1, logo)
@@ -75,6 +72,9 @@ horror.setCurrAnswer(horrorAns[0])
 libraryNpcList = [horror]
 
 background.setNpcList(libraryNpcList)
+
+#Инициализирую личные переменные персонажа
+speed = Jespeed
 
 while True:
     clock.tick(30)

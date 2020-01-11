@@ -12,10 +12,61 @@ from trigger import *
 
 pygame.init()
 pygame.font.init()
-#pygame.mixer.init()
 
-#загружаю базовые звуки (универсальные для всех локаций)
-#pygame.mixer.music.load('music/walking.mp3')
+#Инициализаця персонажей
+#Aлиса
+x, y = 0, 0
+Aspeed = 5
+Acharacter = {"charStand": pygame.image.load("images/characters/charStand.png"),
+"charFor": [pygame.image.load("images/characters/charStand.png"), pygame.image.load("images/characters/charStand.png"), pygame.image.load("images/characters/charStand.png")],
+"charBack": [pygame.image.load("images/characters/charBack1.png"), pygame.image.load("images/characters/charBack2.png"), pygame.image.load("images/characters/charBack2.png")],
+"charLeft": [pygame.image.load("images/characters/charLeft1.png"), pygame.image.load("images/characters/charLeft2.png"), pygame.image.load("images/characters/charLeft3.png")],
+"charRight": [pygame.image.load("images/characters/charRight1.png"), pygame.image.load("images/characters/charRight2.png"), pygame.image.load("images/characters/charRight3.png")]}
+AcharacterSize = Acharacter["charStand"].get_size()
+alice = GameObject(x, y, AcharacterSize[0], AcharacterSize[1])
+fps = 8
+spriteAm = 3
+AspriteList = []
+for  i in range(spriteAm):
+    for j in range(fps):
+        AspriteList.append(i)
+alice.setName(TextObject(None, 25, (255, 255, 255), "Вы:", 1, alice))
+
+#Джон
+x, y = 0, 0
+Jospeed = 5
+Jocharacter = {"charStand": pygame.image.load("images/characters/john.png"),
+"charFor": [pygame.image.load("images/characters/john.png"), pygame.image.load("images/characters/john.png"), pygame.image.load("images/characters/john.png")],
+"charBack": [pygame.image.load("images/characters/john.png"), pygame.image.load("images/characters/john.png"), pygame.image.load("images/characters/john.png")],
+"charLeft": [pygame.image.load("images/characters/john.png"), pygame.image.load("images/characters/john.png"), pygame.image.load("images/characters/john.png")],
+"charRight": [pygame.image.load("images/characters/john.png"), pygame.image.load("images/characters/john.png"), pygame.image.load("images/characters/john.png")]}
+JocharacterSize = Jocharacter["charStand"].get_size()
+john = GameObject(x, y, JocharacterSize[0], JocharacterSize[1])
+fps = 8
+spriteAm = 3
+JospriteList = []
+for  i in range(spriteAm):
+    for j in range(fps):
+        JospriteList.append(i)
+john.setName(TextObject(None, 25, (255, 255, 255), "Вы:", 1, john))
+
+#Джек
+x, y = 0, 0
+Jespeed = 5
+Jecharacter = {"charStand": pygame.image.load("images/characters/jeck.png"),
+"charFor": [pygame.image.load("images/characters/jeck.png"), pygame.image.load("images/characters/jeck.png"), pygame.image.load("images/characters/jeck.png")],
+"charBack": [pygame.image.load("images/characters/jeck.png"), pygame.image.load("images/characters/jeck.png"), pygame.image.load("images/characters/jeck.png")],
+"charLeft": [pygame.image.load("images/characters/jeck.png"), pygame.image.load("images/characters/jeck.png"), pygame.image.load("images/characters/jeck.png")],
+"charRight": [pygame.image.load("images/characters/jeck.png"), pygame.image.load("images/characters/jeck.png"), pygame.image.load("images/characters/jeck.png")]}
+JecharacterSize = Jecharacter["charStand"].get_size()
+jeck = GameObject(x, y, JecharacterSize[0], JecharacterSize[1])
+fps = 8
+spriteAm = 3
+JespriteList = []
+for  i in range(spriteAm):
+    for j in range(fps):
+        JespriteList.append(i)
+jeck.setName(TextObject(None, 25, (255, 255, 255), "Вы:", 1, jeck))
 
 #cписок локаций
 locationObjectsList = {

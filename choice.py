@@ -23,6 +23,10 @@ pygame.mixer.music.load('music/walking.mp3')
 pygame.mixer.music.play(0)
 isEnd = 0
 
+#Инициализаця текстовых сообщений
+nameJohn = TextObject(None, 25, (255, 255, 255), "Джон - 1", 1, 0)
+nameJeck = TextObject(None, 25, (255, 255, 255), "Джек - 2", 1, 0)
+
 while True:
     clock.tick(30)
 
@@ -35,15 +39,19 @@ while True:
 
     pressed = pygame.key.get_pressed()
     if pressed[pygame.K_1]:
-        Jhon = 1
-        Jeck = 0
+        john.isCh = 1
         break
     if pressed[pygame.K_2]:
-        Jeck = 1
-        Jhon = 0
+        jeck.isCh = 1
         break
 
     #"рисую на экране" задник
     screen.blit(background.background, (0, 0))
+    pygame.draw.rect(screen, (255, 255, 255), (340, 175, 70, 110))
+    pygame.draw.rect(screen, (255, 255, 255), (595, 175, 70, 110))
+    screen.blit(pygame.image.load("images/characters/john.png"), (345, 180))
+    screen.blit(pygame.image.load("images/characters/jeck.png"), (600, 180))
+    nameJohn.drawMes(screen, (340, 145))
+    nameJeck.drawMes(screen, (600, 145))
 
     pygame.display.update()

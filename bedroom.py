@@ -15,22 +15,9 @@ pygame.mouse.set_visible(0)
 background = locationObjectsList["bedroom"]
 
 #данные о персонаже
+logo = alice
+logo.setPosition(background.exit_x, background.exit_y)
 x, y = background.exit_x, background.exit_y
-speed = 5
-character = {"charStand": pygame.image.load("images/characters/charStand.png"),
-"charFor": [pygame.image.load("images/characters/charStand.png"), pygame.image.load("images/characters/charStand.png"), pygame.image.load("images/characters/charStand.png")],
-"charBack": [pygame.image.load("images/characters/charBack1.png"), pygame.image.load("images/characters/charBack2.png"), pygame.image.load("images/characters/charBack2.png")],
-"charLeft": [pygame.image.load("images/characters/charLeft1.png"), pygame.image.load("images/characters/charLeft2.png"), pygame.image.load("images/characters/charLeft3.png")],
-"charRight": [pygame.image.load("images/characters/charRight1.png"), pygame.image.load("images/characters/charRight2.png"), pygame.image.load("images/characters/charRight3.png")]}
-characterSize = character["charStand"].get_size()
-logo = GameObject(x, y, characterSize[0], characterSize[1])
-fps = 8
-spriteAm = 3
-spriteList = []
-for  i in range(spriteAm):
-    for j in range(fps):
-        spriteList.append(i)
-logo.setName(TextObject(None, 25, (255, 255, 255), "Вы:", 1, logo))
 
 #Resources
 currentTextMessage = TextObject(None, 10, (0, 0, 0), "", 1, logo)
@@ -56,6 +43,11 @@ pygame.mixer.music.set_endevent(SONG_END)
 pygame.mixer.music.load('music/walking.mp3')
 pygame.mixer.music.play(0)
 isEnd = 0
+
+#Инициализирую личные переменные персонажа
+character = Acharacter
+speed = Aspeed
+spriteList = AspriteList
 
 while True:
     clock.tick(30)
@@ -142,7 +134,7 @@ while True:
         #pygame.mixer.music.queue("music/walking.mp3")
         #pygame.mixer.music.play()
 
-    if pressed[pygame.K_p]:
+    if pressed[pygame.K_o]:
         count = 4
 
     if pressed[pygame.K_w] and pressed[pygame.K_d]:

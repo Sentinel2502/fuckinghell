@@ -28,6 +28,9 @@ class TextObject(GameObject):
             surface.blit(list[i].text, (nx, ny))
             ny += 20
 
+    def drawMes(self, surface, cord):
+        surface.blit(self.text, cord)
+
     def ask(self, other, surface, image): #, image, pressed, button
         surface.blit(image, (other.x + other.width//2, other.y - image.get_size()[0] - 10))
 

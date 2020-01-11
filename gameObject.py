@@ -10,6 +10,7 @@ class GameObject:
         self.y = y
         self.width = width
         self.height = height
+        self.isCh = 0
 
     def setPosition(self, x, y):
         self.x = x
