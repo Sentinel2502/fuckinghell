@@ -12,10 +12,20 @@ screen = pygame.display.set_mode(windowSize)
 pygame.mouse.set_visible(0)
 
 #background
-background = locationObjectsList["bedroom"]
+background = locationObjectsList["library"]
 
-#данные о персонаже
-logo = alice
+#Данные о персонаже
+if jeck.isCh:
+    logo = jeck
+    spriteList = JespriteList
+    character = Jecharacter
+    print("FUUUUUUUUUCK")
+elif john.isCh:
+    logo = john
+    spriteList = JospriteList
+    character = Jocharacter
+    print("JOOOOOOOOOOHN")
+#print("john", john.isCh, "jeck", jeck.isCh)
 logo.setPosition(background.exit_x, background.exit_y)
 x, y = background.exit_x, background.exit_y
 
@@ -44,10 +54,27 @@ pygame.mixer.music.load('music/walking.mp3')
 pygame.mixer.music.play(0)
 isEnd = 0
 
+#библиотекарь
+horrorObj = GameObject(430, 234, 590-430, 389-234)
+horrorObj.setImage(pygame.image.load("images/npc/horror.png"))
+
+horrorAns = [message(makeTextObjectList(("*крики ужаса*", pygame.font.Font(None, 22), 100), (None, 20, (255, 255, 255), "*крики ужаса*", 1, logo), 0, 1), [0], "крики ужаса"),
+message(makeTextObjectList(("...", pygame.font.Font(None, 22), 100), (None, 20, (255, 255, 255), "...", 1, horrorObj), 0, 1), [0], "...")]
+
+horrorQue = [message(makeTextObjectList(("Пх’нглуи мглв’нафх КтулхуР’льех вгах’нагл фхтагн", pygame.font.Font(None, 22), 200), (None, 20, (255, 255, 255), "Пх’нглуи мглв’нафх КтулхуР’льех вгах’нагл фхтагн", 1, horrorObj), 0, 1), [0], "фхтагн"),
+message(makeTextObjectList(("Пх’нглуи мглв’нафх КтулхуР’льех вгах’нагл фхтагн", pygame.font.Font(None, 22), 100), (None, 20, (255, 255, 255), "Ты умрешь!", 1, horrorObj), 0, 1), [0], "смерть")]
+
+horror = npc(horrorObj, TextObject(None, 25, (255, 255, 255), "Библиотекарь:", 1, horrorObj), horrorQue, horrorAns)
+horror.setStartText(horrorQue[0])
+horror.setCurrMessage(horrorQue[0])
+horror.setCurrAnswer(horrorAns[0])
+
+libraryNpcList = [horror]
+
+background.setNpcList(libraryNpcList)
+
 #Инициализирую личные переменные персонажа
-character = Acharacter
-speed = Aspeed
-spriteList = AspriteList
+speed = Jespeed
 
 while True:
     clock.tick(30)
@@ -119,8 +146,6 @@ while True:
             if pressed[pygame.K_s]:
                 y -= speed
 
-    count = 0
-
     #реализую перемещение персонажа
     pressed = pygame.key.get_pressed()
     if not pressed[pygame.K_w] and not pressed[pygame.K_s] and not pressed[pygame.K_d] and not pressed[pygame.K_a]:
@@ -134,7 +159,7 @@ while True:
         #pygame.mixer.music.queue("music/walking.mp3")
         #pygame.mixer.music.play()
 
-    if pressed[pygame.K_o]:
+    if pressed[pygame.K_p]:
         count = 4
 
     if pressed[pygame.K_w] and pressed[pygame.K_d]:
@@ -234,12 +259,5 @@ while True:
         for i in range(len(invSlots)):
             if invSlots[i].isFull:
                 invSlots[i].drawItem(screen)
-
-    #условие перехода на следующую локацию
-    for i in range(len(background.textObjectsList)):
-        count += background.textObjectsList[i].trigger
-    if count >= 4:
-        break
-        #screen.blit(pygame.image.load("images/locations/TheEnd.png"), (0, 0))
 
     pygame.display.update()

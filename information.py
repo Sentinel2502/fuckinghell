@@ -12,33 +12,67 @@ from trigger import *
 
 pygame.init()
 pygame.font.init()
-#pygame.mixer.init()
 
-#данные о персонаже
-x, y = 300, 220
-speed = 5
-character = {"charStand": pygame.image.load("images/characters/charStand.png"),
+#Инициализаця персонажей
+#Aлиса
+x, y = 0, 0
+Aspeed = 5
+Acharacter = {"charStand": pygame.image.load("images/characters/charStand.png"),
 "charFor": [pygame.image.load("images/characters/charStand.png"), pygame.image.load("images/characters/charStand.png"), pygame.image.load("images/characters/charStand.png")],
 "charBack": [pygame.image.load("images/characters/charBack1.png"), pygame.image.load("images/characters/charBack2.png"), pygame.image.load("images/characters/charBack2.png")],
 "charLeft": [pygame.image.load("images/characters/charLeft1.png"), pygame.image.load("images/characters/charLeft2.png"), pygame.image.load("images/characters/charLeft3.png")],
 "charRight": [pygame.image.load("images/characters/charRight1.png"), pygame.image.load("images/characters/charRight2.png"), pygame.image.load("images/characters/charRight3.png")]}
-characterSize = character["charStand"].get_size()
-logo = GameObject(x, y, characterSize[0], characterSize[1])
+AcharacterSize = Acharacter["charStand"].get_size()
+alice = GameObject(x, y, AcharacterSize[0], AcharacterSize[1])
 fps = 8
 spriteAm = 3
-spriteList = []
+AspriteList = []
 for  i in range(spriteAm):
     for j in range(fps):
-        spriteList.append(i)
-logo.setName(TextObject(None, 25, (255, 255, 255), "Вы:", 1, logo))
+        AspriteList.append(i)
+alice.setName(TextObject(None, 25, (255, 255, 255), "Вы:", 1, alice))
 
-#загружаю базовые звуки (универсальные для всех локаций)
-#pygame.mixer.music.load('music/walking.mp3')
+#Джон
+x, y = 0, 0
+Jospeed = 5
+Jocharacter = {"charStand": pygame.image.load("images/characters/john.png"),
+"charFor": [pygame.image.load("images/characters/john.png"), pygame.image.load("images/characters/john.png"), pygame.image.load("images/characters/john.png")],
+"charBack": [pygame.image.load("images/characters/john.png"), pygame.image.load("images/characters/john.png"), pygame.image.load("images/characters/john.png")],
+"charLeft": [pygame.image.load("images/characters/john.png"), pygame.image.load("images/characters/john.png"), pygame.image.load("images/characters/john.png")],
+"charRight": [pygame.image.load("images/characters/john.png"), pygame.image.load("images/characters/john.png"), pygame.image.load("images/characters/john.png")]}
+JocharacterSize = Jocharacter["charStand"].get_size()
+john = GameObject(x, y, JocharacterSize[0], JocharacterSize[1])
+fps = 8
+spriteAm = 3
+JospriteList = []
+for  i in range(spriteAm):
+    for j in range(fps):
+        JospriteList.append(i)
+john.setName(TextObject(None, 25, (255, 255, 255), "Вы:", 1, john))
+
+#Джек
+x, y = 0, 0
+Jespeed = 5
+Jecharacter = {"charStand": pygame.image.load("images/characters/jeck.png"),
+"charFor": [pygame.image.load("images/characters/jeck.png"), pygame.image.load("images/characters/jeck.png"), pygame.image.load("images/characters/jeck.png")],
+"charBack": [pygame.image.load("images/characters/jeck.png"), pygame.image.load("images/characters/jeck.png"), pygame.image.load("images/characters/jeck.png")],
+"charLeft": [pygame.image.load("images/characters/jeck.png"), pygame.image.load("images/characters/jeck.png"), pygame.image.load("images/characters/jeck.png")],
+"charRight": [pygame.image.load("images/characters/jeck.png"), pygame.image.load("images/characters/jeck.png"), pygame.image.load("images/characters/jeck.png")]}
+JecharacterSize = Jecharacter["charStand"].get_size()
+jeck = GameObject(x, y, JecharacterSize[0], JecharacterSize[1])
+fps = 8
+spriteAm = 3
+JespriteList = []
+for  i in range(spriteAm):
+    for j in range(fps):
+        JespriteList.append(i)
+jeck.setName(TextObject(None, 25, (255, 255, 255), "Вы:", 1, jeck))
 
 #cписок локаций
 locationObjectsList = {
 "bedroom": LocationObject((1024, 768), pygame.image.load("images/locations/bedroom.png")),
-"library": LocationObject((1024, 768), pygame.image.load("images/locations/library.png"))}
+"library": LocationObject((1024, 768), pygame.image.load("images/locations/library.png")),
+"choice": LocationObject((1024, 768), pygame.image.load("images/locations/choice.png"))}
 
 
 #СПАЛЬНЯ
@@ -66,12 +100,26 @@ bedroomItemObjectsList = []
 locationObjectsList["bedroom"].setGameField(GameObject(0, 374, 1024, 374))
 locationObjectsList["bedroom"].setIntersectionObjectsList(bedroomIntersectionObjectsList)
 locationObjectsList["bedroom"].setExitObjectsList(bedroomExitObjectsList)
-locationObjectsList["bedroom"].setExitPoint((268, 384))
+locationObjectsList["bedroom"].setExitPoint((200, 300))
 locationObjectsList["bedroom"].setTextObjectsList(bedroomTextObjectsList)
 locationObjectsList["bedroom"].setItemObjectsList(bedroomItemObjectsList)
 locationObjectsList["bedroom"].setNpcList(bedroomNpcList)
 
 #БИБЛИОТЕКА
+#библиотекарь
+#<<<
+
+#<<<
+
+locationObjectsList["library"].setGameField((0, 0, 1024, 768))
+locationObjectsList["library"].setIntersectionObjectsList([])
+locationObjectsList["library"].setExitObjectsList([])
+locationObjectsList["library"].setExitPoint((484, 639))
+locationObjectsList["library"].setTextObjectsList([])
+locationObjectsList["library"].setItemObjectsList([])
+locationObjectsList["library"].setNpcList([])
+
+#Экран выбора персонажа
 
 #ИНВЕНТАРЬ
 inv = GameObject(1024, 768, 272, 384)
