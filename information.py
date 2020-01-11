@@ -20,7 +20,8 @@ pygame.font.init()
 #cписок локаций
 locationObjectsList = {
 "bedroom": LocationObject((1024, 768), pygame.image.load("images/locations/bedroom.png")),
-"library": LocationObject((1024, 768), pygame.image.load("images/locations/library.png"))}
+"library": LocationObject((1024, 768), pygame.image.load("images/locations/library.png")),
+"choice": LocationObject((1024, 768), pygame.image.load("images/locations/choice.png"))}
 
 
 #СПАЛЬНЯ
@@ -66,6 +67,8 @@ locationObjectsList["library"].setExitPoint((484, 639))
 locationObjectsList["library"].setTextObjectsList([])
 locationObjectsList["library"].setItemObjectsList([])
 locationObjectsList["library"].setNpcList([])
+
+#Экран выбора персонажа
 
 #ИНВЕНТАРЬ
 inv = GameObject(1024, 768, 272, 384)

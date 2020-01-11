@@ -21,19 +21,19 @@ class npc():
             ny = 260
             sx = 360
             sy = 280
-            list = self.currMessage.textObjList
+            list = self.currMessage.textObjList.ques
         elif mode == "gameObject":
             nx = 360 + 225
             ny = 260
             sx = 360 + 225
             sy = 280
-            list = self.currAnswer.textObjList
+            list = self.currAnswer.textObjList.ques
 
         surface.blit(other.name.text, (nx, ny))
 
         for i in range(len(list)):
             surface.blit(list[i].text, (sx, sy))
-            sy += 10
+            sy += 20
 
 
     def setStartText(self, textObj):
