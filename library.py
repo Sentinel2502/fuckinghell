@@ -3,6 +3,7 @@ from gameObject import *
 from locations import *
 from information import *
 from invSlotObject import *
+from answer import *
 
 #Initialize pygame
 pygame.init()
@@ -75,6 +76,17 @@ background.setNpcList(libraryNpcList)
 
 #Инициализирую личные переменные персонажа
 speed = Jespeed
+
+#создаю ответы для некоторых коротких ответов
+yes = Answer(TextObject(None, 25, (255, 255, 255), "Да - 1", 1, 0), 1)
+no = Answer(TextObject(None, 25, (255, 255, 255), "Нет - 2", 1, 0), 2)
+
+#присваиваю ответы некотором текстовым объектам
+background.textObjectsList[0].setAnswerList([yes, no])
+
+#список триггеров (зачем же мне целый класс для них тогда?)
+isRest = 0
+isWait = 0
 
 while True:
     clock.tick(30)
@@ -152,12 +164,9 @@ while True:
         screen.blit(character["charStand"], (x, y))
         pygame.mixer.music.stop()
         isEnd = 1
-        #pygame.mixer.music.stop()
     else:
         if curSprite + 1 > len(spriteList)-1:
             curSprite = 0
-        #pygame.mixer.music.queue("music/walking.mp3")
-        #pygame.mixer.music.play()
 
     if pressed[pygame.K_p]:
         count = 4
@@ -240,14 +249,8 @@ while True:
 
             if background.textObjectsList[i].isVisible:
                 pygame.draw.rect(screen, (0, 0, 0), (450, 350, 320, 130))
-                if i == 0:
-                    screen.blit(diary, (100, 100))
-                else:
-                    background.textObjectsList[i].draw(background.textObjectsList[i].ques, "text", screen)
+                background.textObjectsList[i].draw(background.textObjectsList[i].ques, "text", screen)
                 print(background.textObjectsList[i].ques[0].string, background.textObjectsList[i].trigger)
-                if background.textObjectsList[i].trigger == 1:
-                    background.textObjectsList[i].isInter = 0
-                    background.textObjectsList[(i+1)%4].isInter = 1
 
         else:
             background.textObjectsList[i].isVisible = 0

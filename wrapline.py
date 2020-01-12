@@ -65,3 +65,6 @@ class makeTextObjectList(TextObject):
 
     def setTrigger(self, value):
         self.trigger = value
+
+    def setAnswerList(self, answerList):
+        self.answerList = answerList

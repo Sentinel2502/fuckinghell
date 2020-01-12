@@ -18,16 +18,16 @@ pygame.font.init()
 x, y = 0, 0
 Aspeed = 5
 Acharacter = {"charStand": pygame.image.load("images/characters/charStand.png"),
-"charFor": [pygame.image.load("images/characters/charStand.png"), pygame.image.load("images/characters/charStand.png"), pygame.image.load("images/characters/charStand.png")],
-"charBack": [pygame.image.load("images/characters/charBack1.png"), pygame.image.load("images/characters/charBack2.png"), pygame.image.load("images/characters/charBack2.png")],
-"charLeft": [pygame.image.load("images/characters/charLeft1.png"), pygame.image.load("images/characters/charLeft2.png"), pygame.image.load("images/characters/charLeft3.png")],
-"charRight": [pygame.image.load("images/characters/charRight1.png"), pygame.image.load("images/characters/charRight2.png"), pygame.image.load("images/characters/charRight3.png")]}
+"charFor": [pygame.image.load("images/characters/charFor1.png"), pygame.image.load("images/characters/charFor2.png"), pygame.image.load("images/characters/charFor3.png"), pygame.image.load("images/characters/charFor4.png"), pygame.image.load("images/characters/charFor5.png"), pygame.image.load("images/characters/charFor6.png")],
+"charBack": [pygame.image.load("images/characters/charBack1.png"), pygame.image.load("images/characters/charBack2.png"), pygame.image.load("images/characters/charBack3.png"), pygame.image.load("images/characters/charBack4.png"), pygame.image.load("images/characters/charBack5.png"), pygame.image.load("images/characters/charBack6.png")],
+"charLeft": [pygame.image.load("images/characters/charLeft1.png"), pygame.image.load("images/characters/charLeft2.png"), pygame.image.load("images/characters/charLeft3.png"), pygame.image.load("images/characters/charLeft1.png"), pygame.image.load("images/characters/charLeft2.png"), pygame.image.load("images/characters/charLeft3.png")],
+"charRight": [pygame.image.load("images/characters/charRight1.png"), pygame.image.load("images/characters/charRight2.png"), pygame.image.load("images/characters/charRight3.png"), pygame.image.load("images/characters/charRight1.png"), pygame.image.load("images/characters/charRight2.png"), pygame.image.load("images/characters/charRight3.png")]}
 AcharacterSize = Acharacter["charStand"].get_size()
 alice = GameObject(x, y, AcharacterSize[0], AcharacterSize[1])
 fps = 8
-spriteAm = 3
+spriteAm = 6
 AspriteList = []
-for  i in range(spriteAm):
+for i in range(spriteAm):
     for j in range(fps):
         AspriteList.append(i)
 alice.setName(TextObject(None, 25, (255, 255, 255), "Вы:", 1, alice))
@@ -106,16 +106,13 @@ locationObjectsList["bedroom"].setItemObjectsList(bedroomItemObjectsList)
 locationObjectsList["bedroom"].setNpcList(bedroomNpcList)
 
 #БИБЛИОТЕКА
-#библиотекарь
-#<<<
-
-#<<<
+libraryTextObjectsList = [makeTextObjectList(("Старое, но уютное кресло. Хочу ли я отдохнуть?", pygame.font.Font(None, 25), 200), (None, 25, (255, 255, 255), "Старое, но уютное кресло. Хочу ли я отдохнуть?", 0, GameObject(803, 571, 889-803, 685)), 0, 1)]
 
 locationObjectsList["library"].setGameField((0, 0, 1024, 768))
 locationObjectsList["library"].setIntersectionObjectsList([])
 locationObjectsList["library"].setExitObjectsList([])
 locationObjectsList["library"].setExitPoint((484, 639))
-locationObjectsList["library"].setTextObjectsList([])
+locationObjectsList["library"].setTextObjectsList(libraryTextObjectsList)
 locationObjectsList["library"].setItemObjectsList([])
 locationObjectsList["library"].setNpcList([])
 
