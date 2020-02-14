@@ -12,6 +12,12 @@ windowSize = (1024, 768)
 screen = pygame.display.set_mode(windowSize)
 pygame.mouse.set_visible(0)
 
+#Переменные, служащие заменой тригеррам
+is_armchair = 0
+
+#Переменные для точек выхода
+exitPoint_hall = GameObject(12, 398, 42-12, 459-398)
+
 #background
 background = locationObjectsList["library"]
 
@@ -63,7 +69,7 @@ horrorAns = [message(makeTextObjectList(("*крики ужаса*", pygame.font.
 message(makeTextObjectList(("...", pygame.font.Font(None, 22), 100), (None, 20, (255, 255, 255), "...", 1, horrorObj), 0, 1), [0], "...")]
 
 horrorQue = [message(makeTextObjectList(("Пх’нглуи мглв’нафх КтулхуР’льех вгах’нагл фхтагн", pygame.font.Font(None, 22), 200), (None, 20, (255, 255, 255), "Пх’нглуи мглв’нафх КтулхуР’льех вгах’нагл фхтагн", 1, horrorObj), 0, 1), [0], "фхтагн"),
-message(makeTextObjectList(("Пх’нглуи мглв’нафх КтулхуР’льех вгах’нагл фхтагн", pygame.font.Font(None, 22), 100), (None, 20, (255, 255, 255), "Ты умрешь!", 1, horrorObj), 0, 1), [0], "смерть")]
+message(makeTextObjectList(("Кхм, прошу прощения, мистер! Вы знали, что только что нагло забыли об игре и отдохнули в своё удовольствие? Не звучит как упрёк, не так ли? Все потому, что я хвалю Вас. Сделать паузу можно и нужно, если Вам будет казаться необходимым, в особенности, если Вы устали или даже выгорели! Я отдаю Вам часть амулета и скрипты ещё в начале моего монолога разрешили бы Вам пройти в следующую комнату. Удачи и помните, что здоровый отдых всегда будет одним из вариантов решения любой проблемы.", pygame.font.Font(None, 22), 260), (None, 17, (255, 255, 255), "Кхм, прошу прощения, мистер! Вы знали, что только что нагло забыли об игре и отдохнули в своё удовольствие? Не звучит как упрёк, не так ли? Все потому, что я хвалю Вас. Сделать паузу можно и нужно, если Вам будет казаться необходимым, в особенности, если Вы устали или даже выгорели! Я отдаю Вам часть амулета и скрипты ещё в начале моего монолога разрешили бы Вам пройти в следующую комнату. Удачи и помните, что здоровый отдых всегда будет одним из вариантов решения любой проблемы.", 1, horrorObj), 0, 1), [0], "концовка1")]
 
 horror = npc(horrorObj, TextObject(None, 25, (255, 255, 255), "Библиотекарь:", 1, horrorObj), horrorQue, horrorAns)
 horror.setStartText(horrorQue[0])
@@ -98,6 +104,10 @@ while True:
             pygame.mixer.music.play()
             isEnd = 0
             #pygame.mixer.music.queue('music/walking.mp3')
+
+    #условие перехода на следующую локацию
+    if logo.intersects(exitPoint_hall, 0):
+        break
 
     #задаю координаты гг
     logo.setPosition(x, y)
@@ -241,20 +251,40 @@ while True:
                 if i == 0:
                     isVisible = 1
                 background.textObjectsList[i].isVisible = 1
-                background.textObjectsList[i].setTrigger(1)
             elif pressed[pygame.K_ESCAPE]:
                 background.textObjectsList[i].isVisible = 0
             elif not background.textObjectsList[i].isVisible:
                 background.textObjectsList[i].ask(logo, screen, pygame.image.load("images/icons/eye.png"))
 
+            #проверка на столкновение с креслом
             if background.textObjectsList[i].isVisible:
                 pygame.draw.rect(screen, (0, 0, 0), (450, 350, 320, 130))
                 background.textObjectsList[i].draw(background.textObjectsList[i].ques, "text", screen)
+                for j in range(len(background.textObjectsList[i].answerList)):
+                    background.textObjectsList[i].answerList[j].drawMes(screen, (450 + j*100, 460))
+                    if pressed[pygame.K_1]:
+                        background.textObjectsList[i].isVisible = 0
+                        background.textObjectsList[i].isInter = 0
+                        background.textObjectsList[i].setTrigger(1)
+                        is_armchair = 1
+                    elif pressed[pygame.K_2]:
+                        background.textObjectsList[i].isVisible = 0
+                        background.textObjectsList[i].isInter = 1
+                        background.textObjectsList[i].setTrigger(2)
                 print(background.textObjectsList[i].ques[0].string, background.textObjectsList[i].trigger)
 
         else:
             background.textObjectsList[i].isVisible = 0
-            isVisible = 0
+            #isVisible = 0
+
+    #проверяю значения триггеров текстовых объектов
+    for i in range(len(background.textObjectsList)):
+        if background.textObjectsList[i].trigger == 1:
+            horrorQue[1].textObjList.isVisible = 1
+            print("ONE")
+        if background.textObjectsList[i].trigger == 2:
+            print("ONE")
+
 
     #вывожу инвентарь на экран
     if isInventory:
@@ -262,5 +292,11 @@ while True:
         for i in range(len(invSlots)):
             if invSlots[i].isFull:
                 invSlots[i].drawItem(screen)
+
+    #проверяю значения своих тригерров-переменных
+    if is_armchair:
+        background.npcList[i].currMessage = horrorQue[1]
+        background.npcList[i].currAnswer = horrorAns[1]
+
 
     pygame.display.update()

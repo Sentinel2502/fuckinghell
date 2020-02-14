@@ -24,7 +24,7 @@ Acharacter = {"charStand": pygame.image.load("images/characters/charStand.png"),
 "charRight": [pygame.image.load("images/characters/charRight1.png"), pygame.image.load("images/characters/charRight2.png"), pygame.image.load("images/characters/charRight3.png"), pygame.image.load("images/characters/charRight1.png"), pygame.image.load("images/characters/charRight2.png"), pygame.image.load("images/characters/charRight3.png")]}
 AcharacterSize = Acharacter["charStand"].get_size()
 alice = GameObject(x, y, AcharacterSize[0], AcharacterSize[1])
-fps = 8
+fps = 6
 spriteAm = 6
 AspriteList = []
 for i in range(spriteAm):

@@ -53,6 +53,9 @@ class makeTextObjectList(TextObject):
         smoothing = 1
         self.object = textObjects_args[5]
         self.isInter = isInter
+        self.answerList = []
+        self.triggerList = []
+        self.trigger = 0
 
         ques = []
 
